@@ -1,0 +1,105 @@
+.TH "QwtIntervalData" 3 "Tue Nov 20 2012" "Version 5.2.3" "Qwt User's Guide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+QwtIntervalData \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <qwt_interval_data\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBQwtIntervalData\fP ()"
+.br
+.ti -1c
+.RI "\fBQwtIntervalData\fP (const QwtArray< \fBQwtDoubleInterval\fP > &, const QwtArray< double > &)"
+.br
+.ti -1c
+.RI "\fB~QwtIntervalData\fP ()"
+.br
+.ti -1c
+.RI "QwtDoubleRect \fBboundingRect\fP () const "
+.br
+.ti -1c
+.RI "const \fBQwtDoubleInterval\fP & \fBinterval\fP (size_t i) const "
+.br
+.ti -1c
+.RI "void \fBsetData\fP (const QwtArray< \fBQwtDoubleInterval\fP > &, const QwtArray< double > &)"
+.br
+.ti -1c
+.RI "size_t \fBsize\fP () const "
+.br
+.ti -1c
+.RI "double \fBvalue\fP (size_t i) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Series of samples of a value and an interval\&. 
+
+\fBQwtIntervalData\fP is a series of samples of a value and an interval\&. F\&.e\&. error bars are built from samples [x, y1-y2], while a histogram might consist of [x1-x2, y] samples\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "QwtDoubleRect QwtIntervalData::boundingRect () const"
+Calculate the bounding rectangle of the samples
+.PP
+The x coordinates of the rectangle are built from the intervals, the y coordinates from the values\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Bounding rectangle 
+.RE
+.PP
+
+.SS "const \fBQwtDoubleInterval\fP & QwtIntervalData::interval (size_ti) const\fC [inline]\fP"
+Interval of a sample
+.PP
+\fBParameters:\fP
+.RS 4
+\fIi\fP Sample index 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Interval 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBvalue()\fP, \fBsize()\fP 
+.RE
+.PP
+
+.SS "size_t QwtIntervalData::size () const\fC [inline]\fP"
+\fBReturns:\fP
+.RS 4
+Number of samples 
+.RE
+.PP
+
+.SS "double QwtIntervalData::value (size_ti) const\fC [inline]\fP"
+Value of a sample
+.PP
+\fBParameters:\fP
+.RS 4
+\fIi\fP Sample index 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBinterval()\fP, \fBsize()\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Qwt User's Guide from the source code\&.

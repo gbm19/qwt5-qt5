@@ -1,0 +1,224 @@
+.TH "QwtPainter" 3 "Tue Nov 20 2012" "Version 5.2.3" "Qwt User's Guide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+QwtPainter \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <qwt_painter\&.h>\fP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBdeviceClipping\fP ()"
+.br
+.ti -1c
+.RI "static const QRect & \fBdeviceClipRect\fP ()"
+.br
+.ti -1c
+.RI "static void \fBdrawColorBar\fP (QPainter *painter, const \fBQwtColorMap\fP &, const \fBQwtDoubleInterval\fP &, const \fBQwtScaleMap\fP &, Qt::Orientation, const QRect &)"
+.br
+.ti -1c
+.RI "static void \fBdrawEllipse\fP (QPainter *, const QRect &)"
+.br
+.ti -1c
+.RI "static void \fBdrawFocusRect\fP (QPainter *, QWidget *)"
+.br
+.ti -1c
+.RI "static void \fBdrawFocusRect\fP (QPainter *, QWidget *, const QRect &)"
+.br
+.ti -1c
+.RI "static void \fBdrawLine\fP (QPainter *, int x1, int y1, int x2, int y2)"
+.br
+.ti -1c
+.RI "static void \fBdrawLine\fP (QPainter *, const QPoint &p1, const QPoint &p2)"
+.br
+.ti -1c
+.RI "static void \fBdrawPie\fP (QPainter *, const QRect &r, int a, int alen)"
+.br
+.ti -1c
+.RI "static void \fBdrawPoint\fP (QPainter *, int x, int y)"
+.br
+.ti -1c
+.RI "static void \fBdrawPolygon\fP (QPainter *, const QwtPolygon &pa)"
+.br
+.ti -1c
+.RI "static void \fBdrawPolyline\fP (QPainter *, const QwtPolygon &pa)"
+.br
+.ti -1c
+.RI "static void \fBdrawRect\fP (QPainter *, int x, int y, int w, int h)"
+.br
+.ti -1c
+.RI "static void \fBdrawRect\fP (QPainter *, const QRect &rect)"
+.br
+.ti -1c
+.RI "static void \fBdrawRoundFrame\fP (QPainter *, const QRect &, int width, const QPalette &, bool sunken)"
+.br
+.ti -1c
+.RI "static void \fBdrawSimpleRichText\fP (QPainter *, const QRect &, int flags, QTextDocument &)"
+.br
+.ti -1c
+.RI "static void \fBdrawText\fP (QPainter *, int x, int y, const QString &)"
+.br
+.ti -1c
+.RI "static void \fBdrawText\fP (QPainter *, const QPoint &, const QString &)"
+.br
+.ti -1c
+.RI "static void \fBdrawText\fP (QPainter *, int x, int y, int w, int h, int flags, const QString &)"
+.br
+.ti -1c
+.RI "static void \fBdrawText\fP (QPainter *, const QRect &, int flags, const QString &)"
+.br
+.ti -1c
+.RI "static void \fBfillRect\fP (QPainter *, const QRect &, const QBrush &)"
+.br
+.ti -1c
+.RI "static const \fBQwtMetricsMap\fP & \fBmetricsMap\fP ()"
+.br
+.ti -1c
+.RI "static void \fBresetMetricsMap\fP ()"
+.br
+.ti -1c
+.RI "static QPen \fBscaledPen\fP (const QPen &)"
+.br
+.ti -1c
+.RI "static void \fBsetClipRect\fP (QPainter *, const QRect &)"
+.br
+.ti -1c
+.RI "static void \fBsetDeviceClipping\fP (bool)"
+.br
+.ti -1c
+.RI "static void \fBsetMetricsMap\fP (const QPaintDevice *layout, const QPaintDevice *device)"
+.br
+.ti -1c
+.RI "static void \fBsetMetricsMap\fP (const \fBQwtMetricsMap\fP &)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A collection of QPainter workarounds\&. 
+
+1) Clipping to coordinate system limits (Qt3 only)
+.PP
+On X11 pixel coordinates are stored in shorts\&. Qt produces overruns when mapping QCOORDS to shorts\&.
+.PP
+2) Scaling to device metrics
+.PP
+QPainter scales fonts, line and fill patterns to the metrics of the paint device\&. Other values like the geometries of rects, points remain device independend\&. To enable a device independent widget implementation, \fBQwtPainter\fP adds scaling of these geometries\&. (Unfortunately QPainter::scale scales both types of paintings, so the objects of the first type would be scaled twice)\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool QwtPainter::deviceClipping ()\fC [inline]\fP, \fC [static]\fP"
+Returns whether device clipping is enabled\&. On X11 the default is enabled, otherwise it is disabled\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBQwtPainter::setDeviceClipping()\fP 
+.RE
+.PP
+
+.SS "const QRect & QwtPainter::deviceClipRect ()\fC [static]\fP"
+Returns rect for device clipping 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBQwtPainter::setDeviceClipping()\fP 
+.RE
+.PP
+
+.SS "void QwtPainter::drawEllipse (QPainter *painter, const QRect &rect)\fC [static]\fP"
+Wrapper for QPainter::drawEllipse() 
+.SS "void QwtPainter::drawLine (QPainter *painter, intx1, inty1, intx2, inty2)\fC [static]\fP"
+Wrapper for QPainter::drawLine() 
+.SS "void QwtPainter::drawPie (QPainter *painter, const QRect &rect, inta, intalen)\fC [static]\fP"
+Wrapper for QPainter::drawPie() 
+.SS "void QwtPainter::drawPoint (QPainter *painter, intx, inty)\fC [static]\fP"
+Wrapper for QPainter::drawPoint() 
+.SS "void QwtPainter::drawPolygon (QPainter *painter, const QwtPolygon &pa)\fC [static]\fP"
+Wrapper for QPainter::drawPolygon() 
+.SS "void QwtPainter::drawPolyline (QPainter *painter, const QwtPolygon &pa)\fC [static]\fP"
+Wrapper for QPainter::drawPolyline() 
+.SS "void QwtPainter::drawRect (QPainter *painter, intx, inty, intw, inth)\fC [static]\fP"
+Wrapper for QPainter::drawRect() 
+.SS "void QwtPainter::drawRect (QPainter *painter, const QRect &rect)\fC [static]\fP"
+Wrapper for QPainter::drawRect() 
+.SS "void QwtPainter::drawSimpleRichText (QPainter *painter, const QRect &rect, intflags, QTextDocument &text)\fC [static]\fP"
+Wrapper for QSimpleRichText::draw() 
+.SS "void QwtPainter::drawText (QPainter *painter, intx, inty, const QString &text)\fC [static]\fP"
+Wrapper for QPainter::drawText() 
+.SS "void QwtPainter::drawText (QPainter *painter, const QPoint &pos, const QString &text)\fC [static]\fP"
+Wrapper for QPainter::drawText() 
+.SS "void QwtPainter::drawText (QPainter *painter, intx, inty, intw, inth, intflags, const QString &text)\fC [static]\fP"
+Wrapper for QPainter::drawText() 
+.SS "void QwtPainter::drawText (QPainter *painter, const QRect &rect, intflags, const QString &text)\fC [static]\fP"
+Wrapper for QPainter::drawText() 
+.SS "void QwtPainter::fillRect (QPainter *painter, const QRect &rect, const QBrush &brush)\fC [static]\fP"
+Wrapper for QPainter::fillRect() 
+.SS "const \fBQwtMetricsMap\fP & QwtPainter::metricsMap ()\fC [static]\fP"
+\fBReturns:\fP
+.RS 4
+Metrics map 
+.RE
+.PP
+
+.SS "void QwtPainter::resetMetricsMap ()\fC [static]\fP"
+Reset the metrics map to the ratio 1:1 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBQwtPainter::setMetricsMap()\fP, \fBQwtPainter::resetMetricsMap()\fP 
+.RE
+.PP
+
+.SS "QPen QwtPainter::scaledPen (const QPen &pen)\fC [static]\fP"
+
+.PP
+Scale a pen according to the layout metrics\&. The width of non cosmetic pens is scaled from screen to layout metrics, so that they look similar on paint devices with different resolutions\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpen\fP Unscaled pen 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Scaled pen 
+.RE
+.PP
+
+.SS "void QwtPainter::setClipRect (QPainter *painter, const QRect &rect)\fC [static]\fP"
+Wrapper for QPainter::setClipRect() 
+.SS "void QwtPainter::setDeviceClipping (boolenable)\fC [static]\fP"
+
+.PP
+En/Disable device clipping\&. On X11 the default for device clipping is enabled, otherwise it is disabled\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBQwtPainter::deviceClipping()\fP 
+.RE
+.PP
+
+.SS "void QwtPainter::setMetricsMap (const QPaintDevice *layout, const QPaintDevice *device)\fC [static]\fP"
+Scale all \fBQwtPainter\fP drawing operations using the ratio QwtPaintMetrics(from)\&.logicalDpiX() / QwtPaintMetrics(to)\&.logicalDpiX() and QwtPaintMetrics(from)\&.logicalDpiY() / QwtPaintMetrics(to)\&.logicalDpiY()
+.PP
+\fBSee also:\fP
+.RS 4
+QwtPainter::resetScaleMetrics(), QwtPainter::scaleMetricsX(), QwtPainter::scaleMetricsY() 
+.RE
+.PP
+
+.SS "void QwtPainter::setMetricsMap (const \fBQwtMetricsMap\fP &map)\fC [static]\fP"
+Change the metrics map 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBQwtPainter::resetMetricsMap()\fP, \fBQwtPainter::metricsMap()\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Qwt User's Guide from the source code\&.

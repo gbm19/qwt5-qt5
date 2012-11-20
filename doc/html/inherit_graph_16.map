@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$class_qwt_legend_item_manager.html" title="Abstract API to bind plot items to the legend." alt="" coords="5,132,168,159"/>
+<area shape="rect" id="node3" href="$class_qwt_plot_item.html" title="Base class for items on the plot canvas." alt="" coords="216,132,307,159"/>
+<area shape="rect" id="node5" href="$class_qwt_plot_curve.html" title="A plot item, that represents a series of points." alt="" coords="369,5,468,32"/>
+<area shape="rect" id="node7" href="$class_qwt_plot_grid.html" title="A class which draws a coordinate grid." alt="" coords="373,56,465,83"/>
+<area shape="rect" id="node9" href="$class_qwt_plot_marker.html" title="A class for drawing markers." alt="" coords="365,107,472,133"/>
+<area shape="rect" id="node11" href="$class_qwt_plot_raster_item.html" title="A class, which displays raster data." alt="" coords="355,157,482,184"/>
+<area shape="rect" id="node15" href="$class_qwt_plot_scale_item.html" title="A class which draws a scale inside the plot canvas." alt="" coords="357,208,480,235"/>
+<area shape="rect" id="node17" href="$class_qwt_plot_svg_item.html" title="A plot item, which displays data in Scalable Vector Graphics (SVG) format." alt="" coords="362,259,475,285"/>
+<area shape="rect" id="node13" href="$class_qwt_plot_spectrogram.html" title="A plot item, which displays a spectrogram." alt="" coords="531,157,671,184"/>
+</map>

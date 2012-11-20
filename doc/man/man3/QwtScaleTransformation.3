@@ -1,0 +1,109 @@
+.TH "QwtScaleTransformation" 3 "Tue Nov 20 2012" "Version 5.2.3" "Qwt User's Guide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+QwtScaleTransformation \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <qwt_scale_map\&.h>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBType\fP { \fBLinear\fP, \fBLog10\fP, \fBOther\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBQwtScaleTransformation\fP (Type \fBtype\fP)"
+.br
+.ti -1c
+.RI "virtual \fB~QwtScaleTransformation\fP ()"
+.br
+.ti -1c
+.RI "virtual \fBQwtScaleTransformation\fP * \fBcopy\fP () const "
+.br
+.ti -1c
+.RI "virtual double \fBinvXForm\fP (double x, double p1, double p2, double s1, double s2) const "
+.br
+.ti -1c
+.RI "Type \fBtype\fP () const "
+.br
+.ti -1c
+.RI "virtual double \fBxForm\fP (double x, double s1, double s2, double p1, double p2) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Operations for linear or logarithmic (base 10) transformations\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "double QwtScaleTransformation::invXForm (doublep, doublep1, doublep2, doubles1, doubles2) const\fC [virtual]\fP"
+
+.PP
+Transform a value from the coordinate system of the paint device into the coordinate system of a scale\&. \fBParameters:\fP
+.RS 4
+\fIp\fP Value related to the coordinate system of the paint device 
+.br
+\fIp1\fP First border of the coordinate system of the paint device 
+.br
+\fIp2\fP Second border of the coordinate system of the paint device 
+.br
+\fIs1\fP First border of the coordinate system of the scale 
+.br
+\fIs2\fP Second border of the coordinate system of the scale 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.IP "\fBlinear mapping:\fP" 1c
+s1 + ( s2 - s1 ) / ( p2 - p1 ) * ( p - p1 ); 
+.PP
+.IP "\fBlog10 mapping:\fP" 1c
+exp((p - p1) / (p2 - p1) * log(s2 / s1)) * s1; 
+.PP
+.RE
+.PP
+
+.SS "QwtScaleTransformation::Type QwtScaleTransformation::type () const\fC [inline]\fP"
+\fBReturns:\fP
+.RS 4
+Transformation type 
+.RE
+.PP
+
+.SS "double QwtScaleTransformation::xForm (doubles, doubles1, doubles2, doublep1, doublep2) const\fC [virtual]\fP"
+
+.PP
+Transform a value from the coordinate system of a scale into the coordinate system of the paint device\&. \fBParameters:\fP
+.RS 4
+\fIs\fP Value related to the coordinate system of the scale 
+.br
+\fIs1\fP First border of the coordinate system of the scale 
+.br
+\fIs2\fP Second border of the coordinate system of the scale 
+.br
+\fIp1\fP First border of the coordinate system of the paint device 
+.br
+\fIp2\fP Second border of the coordinate system of the paint device 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.IP "\fBlinear mapping:\fP" 1c
+p1 + (p2 - p1) / (s2 - s1) * (s - s1); 
+.PP
+.IP "\fBlog10 mapping: \fP" 1c
+p1 + (p2 - p1) / log(s2 / s1) * log(s / s1); 
+.PP
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Qwt User's Guide from the source code\&.

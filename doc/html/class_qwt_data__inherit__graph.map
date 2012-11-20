@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qwt_array_data.html" title="Data class containing two QwtArray&lt;double&gt; objects." alt="" coords="5,80,104,107"/>
+<area shape="rect" id="node5" href="$class_qwt_c_pointer_data.html" title="Data class containing two pointers to memory blocks of doubles." alt="" coords="129,80,247,107"/>
+<area shape="rect" id="node7" href="$class_qwt_polygon_f_data.html" title="Data class containing a single QwtArray&lt;QwtDoublePoint&gt; object." alt="" coords="272,80,397,107"/>
+</map>
