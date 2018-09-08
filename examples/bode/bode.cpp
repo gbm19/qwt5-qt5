@@ -102,7 +102,7 @@ MainWin::MainWin(QWidget *parent):
     QToolButton *btnZoom = new QToolButton(toolBar);
 #if QT_VERSION >= 0x040000
     btnZoom->setText("Zoom");
-    btnZoom->setIcon(QIcon(zoom_xpm));
+    btnZoom->setIcon(QIcon(QPixmap(zoom_xpm)));
     btnZoom->setCheckable(true);
     btnZoom->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 #else
@@ -115,7 +115,7 @@ MainWin::MainWin(QWidget *parent):
     QToolButton *btnPrint = new QToolButton(toolBar);
 #if QT_VERSION >= 0x040000
     btnPrint->setText("Print");
-    btnPrint->setIcon(QIcon(print_xpm));
+    btnPrint->setIcon(QIcon(QPixmap(print_xpm)));
     btnPrint->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 #else
     btnPrint->setTextLabel("Print");
@@ -132,7 +132,7 @@ MainWin::MainWin(QWidget *parent):
 #ifdef QT_SVG_LIB
     QToolButton *btnSVG = new QToolButton(toolBar);
     btnSVG->setText("SVG");
-    btnSVG->setIcon(QIcon(print_xpm));
+    btnSVG->setIcon(QIcon(QPixmap(print_xpm)));
     btnSVG->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 #endif
 #endif

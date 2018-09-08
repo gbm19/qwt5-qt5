@@ -102,9 +102,9 @@ QToolBar *MainWindow::toolBar()
     toolBar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
     setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
-    d_startAction = new QAction(QIcon(start_xpm), "Clear", toolBar);
+    d_startAction = new QAction(QIcon(QPixmap(start_xpm)), "Clear", toolBar);
     d_startAction->setCheckable(true);
-    d_clearAction = new QAction(QIcon(clear_xpm), "Clear", toolBar);
+    d_clearAction = new QAction(QIcon(QPixmap(clear_xpm)), "Clear", toolBar);
     QAction *whatsThisAction = QWhatsThis::createAction(toolBar);
     whatsThisAction->setText("Help");
 
