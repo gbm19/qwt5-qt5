@@ -7,17 +7,25 @@ VER_MIN      = 2
 VER_PAT      = 3
 VERSION      = $${VER_MAJ}.$${VER_MIN}.$${VER_PAT}
 
-unix {
-    INSTALLBASE    = /usr/local/qwt-$$VERSION
+equals(QT_MAJOR_VERSION, 5) {
+    QT += widgets printsupport
 }
 
-win32 {
-    INSTALLBASE    = C:/Qwt-$$VERSION
-}
+message(Using QT version $$QT_VERSION)
 
-target.path    = $$INSTALLBASE/lib
-headers.path   = $$INSTALLBASE/include
-doc.path       = $$INSTALLBASE/doc
+target.path    = $$[QT_INSTALL_LIBS]
+doc.path       = $$[QT_INSTALL_DOCS]
+
+VVERSION = $$[QT_VERSION]
+isEmpty(VVERSION) {
+    headers.path   = $$[QT_INSTALL_HEADERS]/qwt5-qt3
+} else {
+    equals(QT_MAJOR_VERSION, 5) {
+        headers.path   = $$[QT_INSTALL_HEADERS]/qwt5-qt5
+    } else {
+        headers.path   = $$[QT_INSTALL_HEADERS]/qwt5-qt4
+    }
+}
 
 ######################################################################
 # qmake internal options

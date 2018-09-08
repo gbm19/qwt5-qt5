@@ -27,6 +27,7 @@ contains(CONFIG, QwtDesigner) {
         else {
             SUFFIX_STR = $${RELEASE_SUFFIX}
         }
+        LIBNAME         = qwt-qt3$${SUFFIX_STR}
     }
     else {
 
@@ -35,6 +36,11 @@ contains(CONFIG, QwtDesigner) {
         }
         else {
             SUFFIX_STR = $${RELEASE_SUFFIX}
+        }
+        equals(QT_MAJOR_VERSION, 5) {
+            LIBNAME         = qwt5-qt5$${SUFFIX_STR}
+        } else {
+            LIBNAME         = qwt$${SUFFIX_STR}
         }
     }
 
@@ -45,7 +51,6 @@ contains(CONFIG, QwtDesigner) {
     INCLUDEPATH    += $${QWT_ROOT}/src 
     DEPENDPATH     += $${QWT_ROOT}/src 
 
-    LIBNAME         = qwt$${SUFFIX_STR}
     contains(CONFIG, QwtDll) {
         win32 {
             DEFINES += QT_DLL QWT_DLL
@@ -103,7 +108,7 @@ contains(CONFIG, QwtDesigner) {
 
         # Qt 4
 
-        TARGET    = qwt_designer_plugin$${SUFFIX_STR}
+        TARGET    = qwt5_designer_plugin$${SUFFIX_STR}
         CONFIG    += qt plugin
         equals(QT_MAJOR_VERSION, 5) {
             QT += designer

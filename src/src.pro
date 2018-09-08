@@ -24,6 +24,7 @@ isEmpty(VVERSION) {
     else {
         SUFFIX_STR = $${RELEASE_SUFFIX} 
     }
+    TARGET            = qwt-qt3$${SUFFIX_STR}
 }
 else {
     CONFIG(debug, debug|release) {
@@ -32,9 +33,27 @@ else {
     else {
         SUFFIX_STR = $${RELEASE_SUFFIX}
     }
+    equals(QT_MAJOR_VERSION, 5) {
+        TARGET            = qwt5-qt5$${SUFFIX_STR}
+    } else {
+        TARGET            = qwt$${SUFFIX_STR}
+    }
+    # pkgconfig support
+    CONFIG     += create_pc create_prl no_install_prl
+    QMAKE_PKGCONFIG_DESCRIPTION = Qt Widgets for Technical Applications
+    QMAKE_PKGCONFIG_LIBDIR = $$[QT_INSTALL_LIBS]
+    equals(QT_MAJOR_VERSION, 5) {
+        QMAKE_PKGCONFIG_NAME = qwt5-qt5$${SUFFIX_STR}
+        QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS]/qwt5-qt5
+        QMAKE_PKGCONFIG_REQUIRES = QtGui QtWidgets QtSvg
+    } else {
+        QMAKE_PKGCONFIG_NAME = qwt5-qt4$${SUFFIX_STR}
+        QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS]/qwt5-qt4
+        QMAKE_PKGCONFIG_REQUIRES = QtGui QtSvg
+    }
+    QMAKE_PKGCONFIG_DESTDIR = pkgconfig
 }
 
-TARGET            = qwt$${SUFFIX_STR}
 TEMPLATE          = lib
 
 MOC_DIR           = moc
@@ -220,9 +239,18 @@ contains(CONFIG, QwtWidgets) {
 # Install directives
 
 headers.files  = $$HEADERS
-doc.files      = $${QWT_ROOT}/doc/html $${QWT_ROOT}/doc/qwt-5.2.0.qch
-unix {
-    doc.files      += $${QWT_ROOT}/doc/man
-}
+INSTALLS      += target headers
 
-INSTALLS       = target headers doc
+html.files     = $${QWT_ROOT}/doc/html
+html.path      = $$[QT_INSTALL_DOCS]/html/
+INSTALLS      += html
+
+qch.files      = $${QWT_ROOT}/doc/qwt-5.2.0.qch
+qch.path       = $$[QT_INSTALL_DOCS]/qch
+INSTALLS      += qch
+
+unix {
+    man.files += $${QWT_ROOT}/doc/man
+    man.path  = /usr/share
+    INSTALLS  += man
+}

@@ -40,7 +40,11 @@ DEPENDPATH  += $${QWT_ROOT}/src
 OBJECTS_DIR  = obj$${SUFFIX_STR}
 DESTDIR      = $${QWT_ROOT}/examples/bin$${SUFFIX_STR}
 
-QWTLIB       = qwt$${SUFFIX_STR}
+equals(QT_MAJOR_VERSION, 5) {
+    QWTLIB       = qwt5-qt5$${SUFFIX_STR}
+} else {
+    QWTLIB       = qwt$${SUFFIX_STR}
+}
 
 win32 {
     contains(CONFIG, QwtDll) {
