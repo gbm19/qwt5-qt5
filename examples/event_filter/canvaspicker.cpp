@@ -70,10 +70,15 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
     switch(e->type())
     {
         case QEvent::FocusIn:
+        {
             showCursor(true);
+            break;
+        }
         case QEvent::FocusOut:
+        {
             showCursor(false);
-
+            break;
+        }
         case QEvent::Paint:
         {   
             QApplication::postEvent(this, new QEvent(QEvent::User));

@@ -175,6 +175,7 @@ QwtPickerMachine::CommandList QwtPickerClickRectMachine::transition(
                     }
                 }
             }
+            break;
         }
         case QEvent::MouseMove:
         case QEvent::Wheel:
