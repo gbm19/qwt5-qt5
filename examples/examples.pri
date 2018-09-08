@@ -9,7 +9,7 @@
 
 QWT_ROOT = ../..
 
-include( $${QWT_ROOT}/qwtconfig.pri )
+include( ../qwtconfig.pri )
 
 SUFFIX_STR =
 VVERSION = $$[QT_VERSION]
