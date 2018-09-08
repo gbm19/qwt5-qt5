@@ -394,7 +394,7 @@ bool QwtPanner::eventFilter(QObject *o, QEvent *e)
 */
 void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
 {
-    if ( me->button() != d_data->button )
+    if ( (int)me->button() != d_data->button )
         return;
 
     QWidget *w = parentWidget();
@@ -405,8 +405,8 @@ void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
     if ( (me->state() & Qt::KeyButtonMask) !=
         (d_data->buttonState & Qt::KeyButtonMask) )
 #else
-    if ( (me->modifiers() & Qt::KeyboardModifierMask) !=
-        (int)(d_data->buttonState & Qt::KeyboardModifierMask) )
+    if ( (uint)(me->modifiers() & Qt::KeyboardModifierMask) !=
+        (d_data->buttonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;
@@ -515,8 +515,8 @@ void QwtPanner::widgetKeyPressEvent(QKeyEvent *ke)
             (ke->state() & Qt::KeyButtonMask) ==
                 (d_data->abortKeyState & Qt::KeyButtonMask);
 #else
-            (ke->modifiers() & Qt::KeyboardModifierMask) ==
-                (int)(d_data->abortKeyState & Qt::KeyboardModifierMask);
+            (uint)(ke->modifiers() & Qt::KeyboardModifierMask) ==
+                (d_data->abortKeyState & Qt::KeyboardModifierMask);
 #endif
         if ( matched )
         {

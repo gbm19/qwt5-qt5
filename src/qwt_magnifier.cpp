@@ -329,15 +329,15 @@ bool QwtMagnifier::eventFilter(QObject *o, QEvent *e)
 */
 void QwtMagnifier::widgetMousePressEvent(QMouseEvent *me)
 {
-    if ( me->button() != d_data->mouseButton || parentWidget() == NULL )
+    if ( (int)me->button() != d_data->mouseButton || parentWidget() == NULL )
         return;
 
 #if QT_VERSION < 0x040000
     if ( (me->state() & Qt::KeyButtonMask) !=
         (d_data->mouseButtonState & Qt::KeyButtonMask) )
 #else
-    if ( (me->modifiers() & Qt::KeyboardModifierMask) !=
-        (int)(d_data->mouseButtonState & Qt::KeyboardModifierMask) )
+    if ( (uint)(me->modifiers() & Qt::KeyboardModifierMask) !=
+        (d_data->mouseButtonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;
@@ -398,8 +398,8 @@ void QwtMagnifier::widgetWheelEvent(QWheelEvent *we)
     if ( (we->state() & Qt::KeyButtonMask) !=
         (d_data->wheelButtonState & Qt::KeyButtonMask) )
 #else
-    if ( (we->modifiers() & Qt::KeyboardModifierMask) !=
-        (int)(d_data->wheelButtonState & Qt::KeyboardModifierMask) )
+    if ( (uint)(we->modifiers() & Qt::KeyboardModifierMask) !=
+        (d_data->wheelButtonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;

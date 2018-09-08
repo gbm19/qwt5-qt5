@@ -217,7 +217,7 @@ bool QwtEventPattern::mouseMatch(uint pattern, const QMouseEvent *e) const
 bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
     const QMouseEvent *e) const
 {
-    if ( e->button() != pattern.button )
+    if ( (int)e->button() != pattern.button )
         return false;
 
     const bool matched =
@@ -225,8 +225,8 @@ bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
         (e->state() & Qt::KeyButtonMask) == 
             (pattern.state & Qt::KeyButtonMask);
 #else
-        (e->modifiers() & Qt::KeyboardModifierMask) == 
-            (int)(pattern.state & Qt::KeyboardModifierMask);
+        (uint)(e->modifiers() & Qt::KeyboardModifierMask) ==
+            (pattern.state & Qt::KeyboardModifierMask);
 #endif
 
     return matched;
@@ -280,8 +280,8 @@ bool QwtEventPattern::keyMatch(
         (e->state() & Qt::KeyButtonMask) == 
             (pattern.state & Qt::KeyButtonMask);
 #else
-        (e->modifiers() & Qt::KeyboardModifierMask) == 
-            (int)(pattern.state & Qt::KeyboardModifierMask);
+        (uint)(e->modifiers() & Qt::KeyboardModifierMask) ==
+            (pattern.state & Qt::KeyboardModifierMask);
 #endif
 
     return matched;
