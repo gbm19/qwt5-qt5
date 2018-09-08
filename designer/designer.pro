@@ -104,7 +104,12 @@ contains(CONFIG, QwtDesigner) {
         # Qt 4
 
         TARGET    = qwt_designer_plugin$${SUFFIX_STR}
-        CONFIG    += qt designer plugin 
+        CONFIG    += qt plugin
+        equals(QT_MAJOR_VERSION, 5) {
+            QT += designer
+        } else {
+            CONFIG    += designer
+        }
 
         RCC_DIR   = resources
 
