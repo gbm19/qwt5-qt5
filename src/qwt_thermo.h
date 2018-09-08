@@ -164,7 +164,7 @@ protected:
     void drawThermo(QPainter *p);
     void layoutThermo( bool update = true );
     virtual void scaleChange();
-    virtual void fontChange(const QFont &oldFont);
+    virtual void changeEvent(QEvent *event);
 
     virtual void paintEvent(QPaintEvent *e);
     virtual void resizeEvent(QResizeEvent *e);

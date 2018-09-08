@@ -519,10 +519,11 @@ void QwtKnob::scaleChange()
     Recalculates the layout
     \sa layoutKnob()
 */
-void QwtKnob::fontChange(const QFont &f)
+void QwtKnob::changeEvent(QEvent *event)
 {
-    QwtAbstractSlider::fontChange( f );
-    layoutKnob();
+    QwtAbstractSlider::changeEvent( event );
+    if (event->type() == QEvent::FontChange)
+        layoutKnob();
 }
 
 /*!

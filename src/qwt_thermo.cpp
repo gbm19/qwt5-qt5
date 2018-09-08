@@ -469,10 +469,11 @@ QwtThermo::ScalePos QwtThermo::scalePosition() const
 }
 
 //! Notify a font change.
-void QwtThermo::fontChange(const QFont &f)
+void QwtThermo::changeEvent(QEvent *event)
 {
-    QWidget::fontChange( f );
-    layoutThermo();
+    QWidget::changeEvent( event );
+    if (event->type() == QEvent::FontChange)
+        layoutThermo();
 }
 
 //! Notify a scale change.

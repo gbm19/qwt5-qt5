@@ -367,10 +367,11 @@ void QwtSlider::scaleChange()
 
 
 //! Notify change in font
-void QwtSlider::fontChange(const QFont &f)
+void QwtSlider::changeEvent(QEvent *event)
 {
-    QwtAbstractSlider::fontChange( f );
-    layoutSlider();
+    QwtAbstractSlider::changeEvent( event );
+    if (event->type() == QEvent::FontChange)
+        layoutSlider();
 }
 
 /*! 

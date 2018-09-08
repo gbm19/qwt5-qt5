@@ -121,7 +121,7 @@ protected:
     virtual void valueChange();
     virtual void rangeChange();
     virtual void scaleChange();
-    virtual void fontChange(const QFont &oldFont);
+    virtual void changeEvent(QEvent *event);
 
     void layoutSlider( bool update = true );
     int xyPosition(double v) const;

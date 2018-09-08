@@ -91,7 +91,7 @@ private:
     virtual void valueChange();
     virtual void rangeChange();
     virtual void scaleChange();
-    virtual void fontChange(const QFont &oldFont);
+    virtual void changeEvent(QEvent *event);
 
     class PrivateData;
     PrivateData *d_data;
