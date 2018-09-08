@@ -34,7 +34,7 @@ isEmpty(VVERSION) {
 CONFIG           += qt     # Also for Qtopia Core!
 CONFIG           += warn_on
 CONFIG           += thread
-CONFIG           += silent
+#CONFIG           += silent
 
 ######################################################################
 # release/debug mode
@@ -106,7 +106,7 @@ CONFIG     += QwtWidgets
 # QwtSVGItem.
 ######################################################################
 
-#CONFIG     += QwtSVGItem
+CONFIG     += QwtSVGItem
 
 ######################################################################
 # You can use the MathML renderer of the Qt solutions package to 
@@ -130,4 +130,4 @@ CONFIG     += QwtDesigner
 # Otherwise you have to build them from the examples directory.
 ######################################################################
 
-#CONFIG     += QwtExamples
+CONFIG     += QwtExamples
