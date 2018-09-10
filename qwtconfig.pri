@@ -7,6 +7,10 @@ VER_MIN      = 2
 VER_PAT      = 3
 VERSION      = $${VER_MAJ}.$${VER_MIN}.$${VER_PAT}
 
+greaterThan(QT_MAJOR_VERSION, 3){
+  CONFIG += c++11
+}
+
 equals(QT_MAJOR_VERSION, 5) {
     QT += widgets printsupport
 }
