@@ -241,8 +241,8 @@ contains(CONFIG, QwtWidgets) {
 headers.files  = $$HEADERS
 INSTALLS      += target headers
 
-html.files     = $${QWT_ROOT}/doc/html
-html.path      = $$[QT_INSTALL_DOCS]/html/
+html.files     = $${QWT_ROOT}/doc/html/*
+html.path      = $$[QT_INSTALL_DOCS]/html/qwt5-qt$$QT_MAJOR_VERSION
 INSTALLS      += html
 
 qch.files      = $${QWT_ROOT}/doc/qwt-5.2.0.qch
