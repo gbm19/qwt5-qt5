@@ -45,13 +45,20 @@ else {
     equals(QT_MAJOR_VERSION, 5) {
         QMAKE_PKGCONFIG_NAME = qwt5-qt5$${SUFFIX_STR}
         QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS]/qwt5-qt5
-        QMAKE_PKGCONFIG_REQUIRES = QtGui QtWidgets QtSvg
+        QMAKE_PKGCONFIG_REQUIRES = Qt5Gui Qt5Widgets Qt5PrintSupport
+        contains(CONFIG, QwtSVGItem) {
+            QMAKE_PKGCONFIG_REQUIRES += Qt5Svg
+        }
     } else {
         QMAKE_PKGCONFIG_NAME = qwt5-qt4$${SUFFIX_STR}
         QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS]/qwt5-qt4
-        QMAKE_PKGCONFIG_REQUIRES = QtGui QtSvg
+        QMAKE_PKGCONFIG_REQUIRES = QtGui
+        contains(CONFIG, QwtSVGItem) {
+            QMAKE_PKGCONFIG_REQUIRES += QtSvg
+        }
     }
     QMAKE_PKGCONFIG_DESTDIR = pkgconfig
+    QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PKGCONFIG_DESTDIR}/$${QMAKE_PKGCONFIG_FILE}.pc
 }
 
 TEMPLATE          = lib
