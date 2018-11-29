@@ -22,7 +22,7 @@ URL:     https://github.com/gbm19/qwt5-qt5
 Source:  qwt5-qt5-%%{commitdate}git%%{shortcommit0}.tar.gz
 
 BuildRequires: pkgconfig(Qt5Gui) pkgconfig(Qt5Widgets) pkgconfig(Qt5PrintSupport)
-BuildRequires: pkgconfig(Qt5Svg)
+BuildRequires: pkgconfig(Qt5Svg) pkgconfig(Qt5Designer)
 
 %description
 The Qwt library contains GUI Components and utility classes which are primarily
