@@ -7,6 +7,7 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
+#include <qlist.h>
 #include <qrect.h>
 #include "qwt_math.h"
 #include "qwt_clipper.h"
