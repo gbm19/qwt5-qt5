@@ -8,7 +8,7 @@
  *****************************************************************************/
 
 #include <qapplication.h>
-#include <qdesktopwidget.h>
+#include <qscreen.h>
 #include <qpaintdevice.h>
 #include <qpainter.h>
 #include "qwt_legend.h"
@@ -274,7 +274,7 @@ void QwtPlotRasterItem::draw(QPainter *painter,
     else if ( d_data->cache.policy == ScreenCache )
     {
         const QSize screenSize =
-            QApplication::desktop()->screenGeometry().size();
+            qApp->primaryScreen()->geometry().size();
 
         if ( paintRect.width() > screenSize.width() ||
             paintRect.height() > screenSize.height() )
