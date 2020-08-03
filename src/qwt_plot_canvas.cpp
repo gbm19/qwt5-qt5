@@ -324,7 +324,7 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
             bgPainter.drawRect(d_data->cache->rect());
         }
         else
-            d_data->cache->fill(this, d_data->cache->rect().topLeft());
+            d_data->cache->fill(bgBrush.color());
 
         QPainter cachePainter(d_data->cache);
         cachePainter.translate(-contentsRect().x(),
