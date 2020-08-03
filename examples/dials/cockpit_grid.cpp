@@ -18,7 +18,7 @@ CockpitGrid::CockpitGrid(QWidget *parent):
     setAutoFillBackground(true);
 #endif
 
-    setPalette(colorTheme(QColor(Qt::darkGray).dark(150)));
+    setPalette(colorTheme(QColor(Qt::darkGray).darker(150)));
 
     QGridLayout *layout = new QGridLayout(this);
     layout->setSpacing(5);
@@ -49,11 +49,11 @@ QwtDial *CockpitGrid::createDial(int pos)
         {
             d_clock = new QwtAnalogClock(this);
 
-            const QColor knobColor = QColor(Qt::gray).light(130);
+            const QColor knobColor = QColor(Qt::gray).lighter(130);
 
             for ( int i = 0; i < QwtAnalogClock::NHands; i++)
             {
-                QColor handColor = QColor(Qt::gray).light(150);
+                QColor handColor = QColor(Qt::gray).lighter(150);
                 int width = 8;
 
                 if ( i == QwtAnalogClock::SecondHand )
@@ -123,13 +123,13 @@ QwtDial *CockpitGrid::createDial(int pos)
 
 QPalette CockpitGrid::colorTheme(const QColor &base) const
 {
-    const QColor background = base.dark(150);
-    const QColor foreground = base.dark(200);
+    const QColor background = base.darker(150);
+    const QColor foreground = base.darker(200);
 
-    const QColor mid = base.dark(110);
-    const QColor dark = base.dark(170);
-    const QColor light = base.light(170);
-    const QColor text = foreground.light(800);
+    const QColor mid = base.darker(110);
+    const QColor dark = base.darker(170);
+    const QColor light = base.lighter(170);
+    const QColor text = foreground.lighter(800);
 
     QPalette palette;
     for ( int i = 0; i < QPalette::NColorGroups; i++ )

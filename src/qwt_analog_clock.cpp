@@ -51,7 +51,7 @@ void QwtAnalogClock::initClock()
 #else
         palette().color(QPalette::Active, QPalette::Text);
 #endif
-    knobColor = knobColor.dark(120);
+    knobColor = knobColor.darker(120);
 
     QColor handColor;
     int width;
@@ -61,7 +61,7 @@ void QwtAnalogClock::initClock()
         if ( i == SecondHand )
         {
             width = 2;
-            handColor = knobColor.dark(120);
+            handColor = knobColor.darker(120);
         }
         else
         {

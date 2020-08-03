@@ -502,7 +502,7 @@ void QwtDial::drawFocusIndicator(QPainter *painter) const
 #else
             color.getHsv(&h, &s, &v);
 #endif
-            color = (v > 128) ? gray.dark(120) : gray.light(120);
+            color = (v > 128) ? gray.darker(120) : gray.lighter(120);
         }
         else
             color = Qt::darkGray;

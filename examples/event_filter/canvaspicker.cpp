@@ -255,7 +255,7 @@ void CanvasPicker::showCursor(bool showIt)
 
     QwtSymbol newSymbol = symbol;
     if ( showIt )
-        newSymbol.setBrush(symbol.brush().color().dark(150));
+        newSymbol.setBrush(symbol.brush().color().darker(150));
 
     const bool doReplot = plot()->autoReplot();
 

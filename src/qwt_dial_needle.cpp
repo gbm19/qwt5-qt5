@@ -74,11 +74,11 @@ void QwtDialNeedle::drawKnob(QPainter *painter,
     QPen pen;
     pen.setWidth(1);
 
-    pen.setColor(brush.color().dark(100 - colorOffset));
+    pen.setColor(brush.color().darker(100 - colorOffset));
     painter->setPen(pen);
     painter->drawArc(rect, startAngle * 16, 180 * 16);
 
-    pen.setColor(brush.color().dark(100 + colorOffset));
+    pen.setColor(brush.color().darker(100 + colorOffset));
     painter->setPen(pen);
     painter->drawArc(rect, (startAngle + 180) * 16, 180 * 16);
 
@@ -269,13 +269,13 @@ void QwtDialSimpleNeedle::drawArrowNeedle(QPainter *painter,
 
     const QColor midColor = palette.color(colorGroup, QwtPalette::Mid);
 
-    painter->setPen(midColor.dark(100 + colorOffset));
+    painter->setPen(midColor.darker(100 + colorOffset));
     painter->drawPolyline(shadowPa);
 
     for ( i = 0; i < 3; i++ )
         shadowPa.setPoint(i, pa[i + 2]);
 
-    painter->setPen(midColor.dark(100 - colorOffset));
+    painter->setPen(midColor.darker(100 - colorOffset));
     painter->drawPolyline(shadowPa);
 
     if ( hasKnob )
@@ -366,14 +366,14 @@ void QwtCompassMagnetNeedle::drawTriangleNeedle(QPainter *painter,
     pa.setPoint(2, qwtDegree2Pos(arrowCenter, width / 2, direction + 90.0));
 
     brush = darkBrush;
-    brush.setColor(brush.color().dark(100 + colorOffset));
+    brush.setColor(brush.color().darker(100 + colorOffset));
     painter->setBrush(brush);
     painter->drawPolygon(pa);
 
     pa.setPoint(2, qwtDegree2Pos(arrowCenter, width / 2, direction - 90.0));
 
     brush = darkBrush;
-    brush.setColor(brush.color().dark(100 - colorOffset));
+    brush.setColor(brush.color().darker(100 - colorOffset));
     painter->setBrush(brush);
     painter->drawPolygon(pa);
 
@@ -384,14 +384,14 @@ void QwtCompassMagnetNeedle::drawTriangleNeedle(QPainter *painter,
     pa.setPoint(2, qwtDegree2Pos(arrowCenter, width / 2, direction + 90.0));
 
     brush = lightBrush;
-    brush.setColor(brush.color().dark(100 + colorOffset));
+    brush.setColor(brush.color().darker(100 + colorOffset));
     painter->setBrush(brush);
     painter->drawPolygon(pa);
 
     pa.setPoint(2, qwtDegree2Pos(arrowCenter, width / 2, direction - 90.0));
 
     brush = lightBrush;
-    brush.setColor(brush.color().dark(100 - colorOffset));
+    brush.setColor(brush.color().darker(100 - colorOffset));
     painter->setBrush(brush);
     painter->drawPolygon(pa);
 
@@ -468,7 +468,7 @@ void QwtCompassMagnetNeedle::drawPointer(
     painter->setPen(Qt::NoPen);
 
     QBrush darkBrush = brush;
-    darkBrush.setColor(darkBrush.color().dark(100 + colorOffset));
+    darkBrush.setColor(darkBrush.color().darker(100 + colorOffset));
     painter->setBrush(darkBrush);
     painter->drawPolygon(pa);
     painter->drawPie(knobRect, qRound(direction * 16), 90 * 16);
@@ -477,7 +477,7 @@ void QwtCompassMagnetNeedle::drawPointer(
     pa.setPoint(4, qwtDegree2Pos(pa.point(0), length - peak, direction));
 
     QBrush lightBrush = brush;
-    lightBrush.setColor(lightBrush.color().dark(100 - colorOffset));
+    lightBrush.setColor(lightBrush.color().darker(100 - colorOffset));
     painter->setBrush(lightBrush);
     painter->drawPolygon(pa);
     painter->drawPie(knobRect, qRound(direction * 16), -90 * 16);
