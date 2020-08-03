@@ -431,8 +431,7 @@ void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
     for ( int i = 0; i < (int)pickers.size(); i++ )
         pickers[i]->setEnabled(false);
 
-    d_data->pixmap = QPixmap::grabWidget(parentWidget(),
-        cr.x(), cr.y(), cr.width(), cr.height());
+    d_data->pixmap = grab();
 
     for ( int i = 0; i < (int)pickers.size(); i++ )
         pickers[i]->setEnabled(true);

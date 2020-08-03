@@ -51,7 +51,7 @@ void ColorBar::mousePressEvent(QMouseEvent *e)
         // emit the color of the position where the mouse click
         // happened
 
-        const QPixmap pm = QPixmap::grabWidget(this);
+        const QPixmap pm = grab();
 #if QT_VERSION < 0x040000
         const QRgb rgb = pm.convertToImage().pixel(e->x(), e->y());
 #else

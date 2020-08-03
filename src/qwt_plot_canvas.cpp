@@ -128,9 +128,7 @@ void QwtPlotCanvas::setPaintAttribute(PaintAttribute attribute, bool on)
 
                 if ( isVisible() )
                 {
-                    const QRect cr = contentsRect();
-                    *d_data->cache = QPixmap::grabWidget(this,
-                        cr.x(), cr.y(), cr.width(), cr.height() );
+                    *d_data->cache = grab();
                 }
             }
             else
