@@ -398,7 +398,7 @@ void QwtCounter::valueChange()
     if ( isValid() )
         showNum(value());
     else
-        d_data->valueEdit->setText(QString::null);
+        d_data->valueEdit->setText(QString());
 
     updateButtons();
 

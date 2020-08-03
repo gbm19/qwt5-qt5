@@ -74,7 +74,7 @@ public:
         it is only available for owners of a commercial Qt license.
       - TeXText\n
         Use a TeX (http://en.wikipedia.org/wiki/TeX) render engine
-        to display the text. 
+        to display the text.
       - OtherFormat\n
         The number of text formats can be extended using setTextEngine.
         Formats >= OtherFormat are not used by Qwt.
@@ -85,7 +85,7 @@ public:
     enum TextFormat
     {
         AutoText = 0,
-        
+
         PlainText,
         RichText,
 
@@ -98,7 +98,7 @@ public:
     /*!
       \brief Paint Attributes
 
-      Font and color and background are optional attributes of a QwtText. 
+      Font and color and background are optional attributes of a QwtText.
       The paint attributes hold the information, if they are set.
 
       - PaintUsingTextFont\n
@@ -131,7 +131,7 @@ public:
         MinimumLayout = 1
     };
 
-    QwtText(const QString & = QString::null, 
+    QwtText(const QString & = QString(),
         TextFormat textFormat = AutoText);
     QwtText(const QwtText &);
     ~QwtText();
@@ -141,7 +141,7 @@ public:
     int operator==(const QwtText &) const;
     int operator!=(const QwtText &) const;
 
-    void setText(const QString &, 
+    void setText(const QString &,
         QwtText::TextFormat textFormat = AutoText);
     QString text() const;
 
@@ -193,15 +193,15 @@ private:
 };
 
 //! \return text().isNull()
-inline bool QwtText::isNull() const 
-{ 
-    return text().isNull(); 
+inline bool QwtText::isNull() const
+{
+    return text().isNull();
 }
 
 //! \return text().isEmpty()
-inline bool QwtText::isEmpty() const 
-{ 
-    return text().isEmpty(); 
+inline bool QwtText::isEmpty() const
+{
+    return text().isEmpty();
 }
 
 #endif

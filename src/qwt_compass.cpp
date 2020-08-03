@@ -293,7 +293,7 @@ void QwtCompass::setLabelMap(const QMap<double, QString> &map)
 /*!
   Map a value to a corresponding label
   \param value Value that will be mapped
-  \return Label, or QString::null
+  \return Label, or QString()
 
   label() looks in a map for a corresponding label for value
   or return an null text.

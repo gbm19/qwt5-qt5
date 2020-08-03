@@ -54,7 +54,7 @@ public:
         ContourMode = 2
     };
 
-    explicit QwtPlotSpectrogram(const QString &title = QString::null);
+    explicit QwtPlotSpectrogram(const QString &title = QString());
     virtual ~QwtPlotSpectrogram();
 
     void setDisplayMode(DisplayMode, bool on = true);

@@ -155,7 +155,7 @@ QString QwtPlugin::group( const QString& feature ) const
 {
     if (entry(feature) != NULL )
         return QString("Qwt"); 
-    return QString::null;
+    return QString();
 }
 
 QIconSet QwtPlugin::iconSet( const QString& pmap) const
@@ -177,21 +177,21 @@ QString QwtPlugin::includeFile( const QString& feature ) const
 {
     if (entry(feature) != NULL)
         return entry(feature)->header;        
-    return QString::null;
+    return QString();
 }
 
 QString QwtPlugin::toolTip( const QString& feature ) const
 {
     if (entry(feature) != NULL )
         return entry(feature)->tooltip;       
-    return QString::null;
+    return QString();
 }
 
 QString QwtPlugin::whatsThis( const QString& feature ) const
 {
     if (entry(feature) != NULL)
         return entry(feature)->whatshis;      
-    return QString::null;
+    return QString();
 }
 
 bool QwtPlugin::isContainer( const QString& ) const

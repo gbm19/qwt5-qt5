@@ -21,7 +21,7 @@ class QString;
 class HistogramItem: public QwtPlotItem
 {
 public:
-    explicit HistogramItem(const QString &title = QString::null);
+    explicit HistogramItem(const QString &title = QString());
     explicit HistogramItem(const QwtText &title);
     virtual ~HistogramItem();
 

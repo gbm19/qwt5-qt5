@@ -132,7 +132,7 @@ QToolBar *MainWindow::toolBar()
     QWidget *hBox = new QWidget(toolBar);
 
     d_randomCount = 
-        new Counter(hBox, "Points", QString::null, 1, 100000, 100);
+        new Counter(hBox, "Points", QString(), 1, 100000, 100);
     d_randomCount->setValue(1000);
 
     d_timerCount = new Counter(hBox, "Delay", "ms", 0, 100000, 100);
