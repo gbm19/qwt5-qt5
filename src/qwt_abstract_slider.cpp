@@ -8,7 +8,7 @@
  *****************************************************************************/
 
 #include <qevent.h>
-#include <qdatetime.h>
+#include <qelapsedtimer.h>
 #include "qwt_abstract_slider.h"
 #include "qwt_math.h"
 
@@ -38,7 +38,7 @@ public:
     int tmrID;
     int updTime;
     int timerTick;
-    QTime time;
+    QElapsedTimer timer;
     double speed;
     double mass;
     Qt::Orientation orientation;
@@ -173,7 +173,7 @@ void QwtAbstractSlider::mousePressEvent(QMouseEvent *e)
             break;
         
         case ScrMouse:
-            d_data->time.start();
+            d_data->timer.start();
             d_data->speed = 0;
             d_data->mouseOffset = getValue(p) - value();
             emit sliderPressed();
@@ -220,7 +220,7 @@ void QwtAbstractSlider::mouseReleaseEvent(QMouseEvent *e)
             d_data->mouseOffset = 0;
             if (d_data->mass > 0.0) 
             {
-                const int ms = d_data->time.elapsed();
+                const int ms = d_data->timer.elapsed();
                 if ((fabs(d_data->speed) >  0.0) && (ms < 50))
                     d_data->tmrID = startTimer(d_data->updTime);
             }
@@ -324,11 +324,11 @@ void QwtAbstractSlider::mouseMoveEvent(QMouseEvent *e)
         setPosition(e->pos());
         if (d_data->mass > 0.0) 
         {
-            double ms = double(d_data->time.elapsed());
+            double ms = double(d_data->timer.elapsed());
             if (ms < 1.0) 
                 ms = 1.0;
             d_data->speed = (exactValue() - exactPrevValue()) / ms;
-            d_data->time.start();
+            d_data->timer.start();
         }
         if (value() != prevValue())
             emit sliderMoved(value());
