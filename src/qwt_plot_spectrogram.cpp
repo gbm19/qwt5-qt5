@@ -15,6 +15,7 @@
 #include "qwt_scale_map.h"
 #include "qwt_color_map.h"
 #include "qwt_plot_spectrogram.h"
+#include <algorithm>
 
 #if QT_VERSION < 0x040000
 typedef QValueVector<QRgb> QwtColorTable;
@@ -317,7 +318,7 @@ void QwtPlotSpectrogram::setContourLevels(const QwtValueList &levels)
 {
     d_data->contourLevels = levels;
 #if QT_VERSION >= 0x040000
-    qSort(d_data->contourLevels);
+    std::sort(d_data->contourLevels.begin(),d_data->contourLevels.end());
 #else
     qHeapSort(d_data->contourLevels);
 #endif

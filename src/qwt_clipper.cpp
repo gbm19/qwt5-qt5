@@ -11,6 +11,7 @@
 #include <qrect.h>
 #include "qwt_math.h"
 #include "qwt_clipper.h"
+#include <algorithm>
 
 static inline QwtDoubleRect boundingRect(const QwtPolygonF &polygon)
 {
@@ -387,7 +388,7 @@ QwtArray<QwtDoubleInterval> QwtCircleClipper::clipCircle(
         QList<double> angles;
         for ( int i = 0; i < points.size(); i++ )
             angles += toAngle(pos, points[i]);
-        qSort(angles);
+        std::sort(angles.begin(),angles.end());
 
         const int in = contains(qwtPolar2Pos(pos, radius, 
             angles[0] + (angles[1] - angles[0]) / 2));
