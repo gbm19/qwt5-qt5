@@ -643,13 +643,13 @@ QwtText QwtPicker::trackerText(const QPoint &pos) const
     switch(rubberBand())
     {
         case HLineRubberBand:
-            label.sprintf("%d", pos.y());
+            label = QString::number(pos.y());
             break;
         case VLineRubberBand:
-            label.sprintf("%d", pos.x());
+            label = QString::number(pos.x());
             break;
         default:
-            label.sprintf("%d, %d", pos.x(), pos.y());
+            label = QString::number(pos.x()) + ", " + QString::number(pos.y());
     }
     return label;
 }

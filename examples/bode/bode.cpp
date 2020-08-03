@@ -321,11 +321,12 @@ void MainWin::showInfo(QString text)
 void MainWin::moved(const QPoint &pos)
 {
     QString info;
-    info.sprintf("Freq=%g, Ampl=%g, Phase=%g",
-        d_plot->invTransform(QwtPlot::xBottom, pos.x()),
-        d_plot->invTransform(QwtPlot::yLeft, pos.y()),
-        d_plot->invTransform(QwtPlot::yRight, pos.y())
-    );
+    info = "Freq="
+        + QString::number(d_plot->invTransform(QwtPlot::xBottom, pos.x()), 'g')
+        + ", Ampl="
+        + QString::number(d_plot->invTransform(QwtPlot::yLeft, pos.y()), 'g')
+        + ", Phase="
+        + QString::number(d_plot->invTransform(QwtPlot::yRight, pos.y()), 'g');
     showInfo(info);
 }
 

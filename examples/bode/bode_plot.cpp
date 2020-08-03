@@ -106,7 +106,7 @@ void BodePlot::showData(double *frequency, double *amplitude,
 void BodePlot::showPeak(double freq, double amplitude)
 {
     QString label;
-    label.sprintf("Peak: %.3g dB", amplitude);
+    label = "Peak: " + QString::number(amplitude, 'g', 3) + "dB";
 
     QwtText text(label);
     text.setFont(QFont("Helvetica", 10, QFont::Bold));
@@ -119,7 +119,7 @@ void BodePlot::showPeak(double freq, double amplitude)
 void BodePlot::show3dB(double freq)
 {
     QString label;
-    label.sprintf("-3 dB at f = %.3g", freq);
+    label = "-3 dB at f = " + QString::number(freq, 'g', 3);
 
     QwtText text(label);
     text.setFont(QFont("Helvetica", 10, QFont::Bold));

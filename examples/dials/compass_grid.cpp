@@ -150,7 +150,7 @@ QwtCompass *CompassGrid::createCompass(int pos)
             for ( double d = 0.0; d < 360.0; d += 60.0 )
             {
                 QString label;
-                label.sprintf("%.0f", d);
+                label = QString::number(d, 'f', 0);
                 map.insert(d, label);
             }
             compass->setLabelMap(map);
