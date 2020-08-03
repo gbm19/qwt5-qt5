@@ -23,7 +23,7 @@
 #define QwtMatrix QWMatrix
 #else
 #include <qmatrix.h>
-#define QwtMatrix QMatrix
+#define QwtMatrix QTransform
 #endif
 
 class QwtScaleDraw::PrivateData
@@ -655,7 +655,7 @@ void QwtScaleDraw::drawLabel(QPainter *painter, double value) const
 #if QT_VERSION < 0x040000
     painter->setWorldMatrix(m, true);
 #else
-    painter->setMatrix(m, true);
+    painter->setTransform(m, true);
 #endif
 
     lbl.draw (painter, QRect(QPoint(0, 0), labelSize) );

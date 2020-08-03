@@ -87,7 +87,7 @@ protected:
 #if QT_VERSION < 0x040000
     QWMatrix labelMatrix(const QPoint &, const QSize &) const;
 #else   
-    QMatrix labelMatrix(const QPoint &, const QSize &) const;
+    QTransform labelMatrix(const QPoint &, const QSize &) const;
 #endif  
 
     virtual void drawTick(QPainter *p, double val, int len) const;

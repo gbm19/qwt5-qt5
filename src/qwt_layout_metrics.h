@@ -21,7 +21,7 @@ class QFontMetrics;
 #if QT_VERSION < 0x040000
 class QWMatrix;
 #else
-class QMatrix;
+class QTransform;
 #endif
 class QPaintDevice;
 
@@ -85,8 +85,8 @@ public:
     static QwtPolygon translate(const QWMatrix &, const QwtPolygon &);
     static QRect translate(const QWMatrix &, const QRect &);
 #else
-    static QwtPolygon translate(const QMatrix &, const QwtPolygon &);
-    static QRect translate(const QMatrix &, const QRect &);
+    static QwtPolygon translate(const QTransform &, const QwtPolygon &);
+    static QRect translate(const QTransform &, const QRect &);
 #endif
 
 private:

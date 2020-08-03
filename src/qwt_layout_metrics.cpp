@@ -14,8 +14,8 @@
 #include <qwmatrix.h> 
 #define QwtMatrix QWMatrix
 #else
-#include <qmatrix.h> 
-#define QwtMatrix QMatrix
+#include <qtransform.h>
+#define QwtMatrix QTransform
 #endif
 #include <qpaintdevice.h> 
 #include <qdesktopwidget.h> 
@@ -51,13 +51,13 @@ inline static QWMatrix invMatrix(const QPainter *painter)
 
 #else // QT_VERSION >= 0x040000
 
-inline static const QMatrix &matrix(const QPainter *painter)
+inline static const QTransform &matrix(const QPainter *painter)
 {
-    return painter->matrix();
+    return painter->transform();
 }
-inline static QMatrix invMatrix(const QPainter *painter)
+inline static QTransform invMatrix(const QPainter *painter)
 {
-    return painter->matrix().inverted();
+    return painter->transform().inverted();
 }
 
 #endif
