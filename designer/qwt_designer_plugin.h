@@ -247,6 +247,6 @@ private:
     QWidget *d_widget;
 };
 
-};
+}
 
 #endif
