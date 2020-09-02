@@ -111,6 +111,7 @@ contains(CONFIG, QwtDesigner) {
         TARGET    = qwt5_designer_plugin$${SUFFIX_STR}
         CONFIG    += qt plugin
         equals(QT_MAJOR_VERSION, 5) {
+            QMAKE_PKGCONFIG_REQUIRES += Qt5Designer
             QT += designer
         } else {
             CONFIG    += designer
