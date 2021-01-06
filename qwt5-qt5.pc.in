@@ -1,0 +1,13 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/include/qt5/qwt5-qt5
+
+
+Name: qwt5-qt5
+Description: Qt Widgets for Technical Applications
+Version: 5.2.3
+Libs: -L${libdir} -lqwt5-qt5
+Cflags: -I${includedir}
+Requires: Qt5Gui Qt5Widgets Qt5PrintSupport Qt5Svg
+

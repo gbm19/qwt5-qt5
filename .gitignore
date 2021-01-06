@@ -6,3 +6,4 @@ qrc_*
 *.o
 *.a
 *.so
+build/
