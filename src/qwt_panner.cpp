@@ -90,7 +90,7 @@ public:
         delete restoreCursor;
 #endif
     }
-        
+
     int button;
     int buttonState;
     int abortKey;
@@ -211,9 +211,9 @@ const QCursor QwtPanner::cursor() const
 }
 #endif
 
-/*! 
+/*!
   \brief En/disable the panner
- 
+
   When enabled is true an event filter is installed for
   the observed widget, otherwise the event filter is removed.
 
@@ -268,7 +268,7 @@ void QwtPanner::enableOrientation(Qt::Orientation o, bool enable)
 }
 #endif
 
-/*! 
+/*!
    Return true if a orientatio is enabled
    \sa orientations(), setOrientations()
 */
@@ -307,13 +307,7 @@ void QwtPanner::paintEvent(QPaintEvent *pe)
     QPainter painter(&pm);
 
     const QColor bg =
-#if QT_VERSION < 0x040000
-        parentWidget()->palette().color(
-            QPalette::Normal, QColorGroup::Background);
-#else
-        parentWidget()->palette().color(
-            QPalette::Normal, QPalette::Background);
-#endif
+        parentWidget()->palette().color(QPalette::Normal, QPalette::Window);
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(bg));
@@ -333,7 +327,7 @@ void QwtPanner::paintEvent(QPaintEvent *pe)
     painter.drawPixmap(0, 0, pm);
 }
 
-/*! 
+/*!
   \brief Event filter
 
   When isEnabled() the mouse events of the observed widget are filtered.
@@ -461,7 +455,7 @@ void QwtPanner::widgetMouseMoveEvent(QMouseEvent *me)
         d_data->pos = pos;
         update();
 
-        emit moved(d_data->pos.x() - d_data->initialPos.x(), 
+        emit moved(d_data->pos.x() - d_data->initialPos.x(),
             d_data->pos.y() - d_data->initialPos.y());
     }
 }
@@ -493,7 +487,7 @@ void QwtPanner::widgetMouseReleaseEvent(QMouseEvent *me)
 
         if ( d_data->pos != d_data->initialPos )
         {
-            emit panned(d_data->pos.x() - d_data->initialPos.x(), 
+            emit panned(d_data->pos.x() - d_data->initialPos.x(),
                 d_data->pos.y() - d_data->initialPos.y());
         }
     }
@@ -563,7 +557,7 @@ void QwtPanner::showCursor(bool on)
     }
     else
     {
-        if ( d_data->restoreCursor ) 
+        if ( d_data->restoreCursor )
         {
             w->setCursor(*d_data->restoreCursor);
             delete d_data->restoreCursor;

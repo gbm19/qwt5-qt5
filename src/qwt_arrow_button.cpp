@@ -2,7 +2,7 @@
  * Qwt Widget Library
  * Copyright (C) 1997   Josef Wilgen
  * Copyright (C) 2002   Uwe Rathmann
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
@@ -55,8 +55,8 @@ static QStyleOptionButton styleOpt(const QwtArrowButton* btn)
   \param arrowType see Qt::ArowType in the Qt docs.
   \param parent Parent widget
 */
-QwtArrowButton::QwtArrowButton(int num, 
-        Qt::ArrowType arrowType, QWidget *parent): 
+QwtArrowButton::QwtArrowButton(int num,
+        Qt::ArrowType arrowType, QWidget *parent):
     QPushButton(parent)
 {
     d_data = new PrivateData;
@@ -70,11 +70,11 @@ QwtArrowButton::QwtArrowButton(int num,
     {
         case Qt::LeftArrow:
         case Qt::RightArrow:
-            setSizePolicy(QSizePolicy::Expanding, 
+            setSizePolicy(QSizePolicy::Expanding,
                 QSizePolicy::Fixed);
             break;
         default:
-            setSizePolicy(QSizePolicy::Fixed, 
+            setSizePolicy(QSizePolicy::Fixed,
                 QSizePolicy::Expanding);
     }
 }
@@ -89,17 +89,17 @@ QwtArrowButton::~QwtArrowButton()
 /*!
   \brief The direction of the arrows
 */
-Qt::ArrowType QwtArrowButton::arrowType() const 
-{ 
-    return d_data->arrowType; 
+Qt::ArrowType QwtArrowButton::arrowType() const
+{
+    return d_data->arrowType;
 }
 
 /*!
   \brief The number of arrows
 */
-int QwtArrowButton::num() const 
-{ 
-    return d_data->num; 
+int QwtArrowButton::num() const
+{
+    return d_data->num;
 }
 
 /*!
@@ -110,7 +110,7 @@ QRect QwtArrowButton::labelRect() const
     const int m = Margin;
 
     QRect r = rect();
-    r.setRect(r.x() + m, r.y() + m, 
+    r.setRect(r.x() + m, r.y() + m,
         r.width() - 2 * m, r.height() - 2 * m);
 
     if ( isDown() )
@@ -163,11 +163,11 @@ void QwtArrowButton::drawButtonLabel(QPainter *painter)
     QSize boundingSize = labelRect().size();
     if ( isVertical )
         boundingSize.transpose();
-        
-    const int w = 
+
+    const int w =
         (boundingSize.width() - (MaxNum - 1) * Spacing) / MaxNum;
 
-    QSize arrow = arrowSize(Qt::RightArrow, 
+    QSize arrow = arrowSize(Qt::RightArrow,
         QSize(w, boundingSize.height()));
 
     if ( isVertical )
@@ -176,14 +176,14 @@ void QwtArrowButton::drawButtonLabel(QPainter *painter)
     QRect contentsSize; // aligned rect where to paint all arrows
     if ( d_data->arrowType == Qt::LeftArrow || d_data->arrowType == Qt::RightArrow )
     {
-        contentsSize.setWidth(d_data->num * arrow.width() 
+        contentsSize.setWidth(d_data->num * arrow.width()
             + (d_data->num - 1) * Spacing);
         contentsSize.setHeight(arrow.height());
     }
     else
     {
         contentsSize.setWidth(arrow.width());
-        contentsSize.setHeight(d_data->num * arrow.height() 
+        contentsSize.setHeight(d_data->num * arrow.height()
             + (d_data->num - 1) * Spacing);
     }
 
@@ -204,29 +204,18 @@ void QwtArrowButton::drawButtonLabel(QPainter *painter)
         else
             dx = arrow.width() + Spacing;
 
-#if QT_VERSION >= 0x040000
         arrowRect.translate(dx, dy);
-#else
-        arrowRect.moveBy(dx, dy);
-#endif
     }
     painter->restore();
 
     if ( hasFocus() )
     {
-#if QT_VERSION >= 0x040000
         QStyleOptionFocusRect option;
         option.init(this);
-        option.backgroundColor = palette().color(QPalette::Background);
+        option.backgroundColor = palette().color(QPalette::Window);
 
-        style()->drawPrimitive(QStyle::PE_FrameFocusRect, 
+        style()->drawPrimitive(QStyle::PE_FrameFocusRect,
             &option, painter, this);
-#else
-        const QRect focusRect =  
-            style().subRect(QStyle::SR_PushButtonFocusRect, this);
-        style().drawPrimitive(QStyle::PE_FocusRect, painter,
-            focusRect, colorGroup());
-#endif
     }
 }
 
@@ -237,8 +226,8 @@ void QwtArrowButton::drawButtonLabel(QPainter *painter)
     \param r Rectangle where to paint the arrow
     \param arrowType Arrow type
 */
-void QwtArrowButton::drawArrow(QPainter *painter, 
-    const QRect &r, Qt::ArrowType arrowType) const 
+void QwtArrowButton::drawArrow(QPainter *painter,
+    const QRect &r, Qt::ArrowType arrowType) const
 {
     QwtPolygon pa(3);
 
@@ -293,7 +282,7 @@ QSize QwtArrowButton::sizeHint() const
 */
 QSize QwtArrowButton::minimumSizeHint() const
 {
-    const QSize asz = arrowSize(Qt::RightArrow, QSize()); 
+    const QSize asz = arrowSize(Qt::RightArrow, QSize());
 
     QSize sz(
         2 * Margin + (MaxNum - 1) * Spacing + MaxNum * asz.width(),
@@ -307,7 +296,7 @@ QSize QwtArrowButton::minimumSizeHint() const
     QStyleOption styleOption;
     styleOption.init(this);
 
-    const QSize hsz = style()->sizeFromContents(QStyle::CT_PushButton, 
+    const QSize hsz = style()->sizeFromContents(QStyle::CT_PushButton,
         &styleOption, sz, this);
 #if QT_VERSION < 0x040300
     if ( hsz.width() != 80 ) // avoid a bug in the Cleanlooks style
@@ -334,7 +323,7 @@ QSize QwtArrowButton::arrowSize(Qt::ArrowType arrowType,
     QSize bs = boundingSize;
     if ( arrowType == Qt::UpArrow || arrowType == Qt::DownArrow )
         bs.transpose();
-        
+
     const int MinLen = 2;
     const QSize sz = bs.expandedTo(
         QSize(MinLen, 2 * MinLen - 1)); // minimum

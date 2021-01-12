@@ -2,7 +2,7 @@
  * Qwt Widget Library
  * Copyright (C) 1997   Josef Wilgen
  * Copyright (C) 2002   Uwe Rathmann
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
@@ -33,7 +33,7 @@ static bool hasBackgroundColor( const QWidget *widget )
 #if QT_VERSION < 0x040000
     return ( widget->backgroundMode() != Qt::FixedPixmap );
 #else
-    const QBrush brush = 
+    const QBrush brush =
         widget->palette().brush( widget->backgroundRole() );
     return ( brush.style() <= Qt::DiagCrossPattern );
 #endif
@@ -89,7 +89,7 @@ public:
 
 /*!
   Sets filter options to PrintAll
-*/  
+*/
 
 QwtPlotPrintFilter::QwtPlotPrintFilter()
 {
@@ -108,18 +108,18 @@ QwtPlotPrintFilter::~QwtPlotPrintFilter()
 
   \sa options()
 */
-void QwtPlotPrintFilter::setOptions(int options) 
-{ 
-    d_data->options = options; 
+void QwtPlotPrintFilter::setOptions(int options)
+{
+    d_data->options = options;
 }
 
-/*! 
+/*!
   \brief Get plot print options
   \sa setOptions()
 */
-int QwtPlotPrintFilter::options() const 
-{ 
-    return d_data->options; 
+int QwtPlotPrintFilter::options() const
+{
+    return d_data->options;
 }
 
 /*!
@@ -128,8 +128,8 @@ int QwtPlotPrintFilter::options() const
   \param item Type of item where the color belongs
   \return Modified color.
 
-  In case of !(QwtPlotPrintFilter::options() & PrintBackground) 
-  MajorGrid is modified to Qt::darkGray, MinorGrid to Qt::gray. 
+  In case of !(QwtPlotPrintFilter::options() & PrintBackground)
+  MajorGrid is modified to Qt::darkGray, MinorGrid to Qt::gray.
   All other colors are returned unmodified.
 */
 
@@ -162,7 +162,7 @@ QFont QwtPlotPrintFilter::font(const QFont &f, Item) const
     return f;
 }
 
-/*! 
+/*!
   Change color and fonts of a plot
   \sa apply()
 */
@@ -192,7 +192,7 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
             cache.titleColor = palette.color(
                 QPalette::Active, Palette::Text);
             title->setPalette(palette);
-            palette.setColor(QPalette::Active, Palette::Text, 
+            palette.setColor(QPalette::Active, Palette::Text,
                 color(cache.titleColor, Title));
             title->setPalette(palette);
         }
@@ -254,9 +254,9 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
         if ( scaleWidget )
         {
             cache.scaleColor[axis] = scaleWidget->palette().color(
-                QPalette::Active, Palette::Foreground);
+                QPalette::Active, Palette::WindowText);
             QPalette palette = scaleWidget->palette();
-            palette.setColor(QPalette::Active, Palette::Foreground,
+            palette.setColor(QPalette::Active, Palette::WindowText,
                              color(cache.scaleColor[axis], AxisScale));
             scaleWidget->setPalette(palette);
 
@@ -292,8 +292,8 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
     {
         QPalette p = plot->palette();
         cache.widgetBackground = plot->palette().color(
-            QPalette::Active, Palette::Background);
-        p.setColor(QPalette::Active, Palette::Background, 
+            QPalette::Active, Palette::Window);
+        p.setColor(QPalette::Active, Palette::Window,
             color(cache.widgetBackground, WidgetBackground));
         plot->setPalette(p);
     }
@@ -371,7 +371,7 @@ void QwtPlotPrintFilter::apply(QwtPlotItem *item) const
             cache.markerLabelColors.insert(m, label.color());
             label.setColor(color(label.color(), Marker));
             m->setLabel(label);
-            
+
             QPen pen = m->linePen();
             cache.markerLineColors.insert(m, pen.color());
             pen.setColor(color(pen.color(), Marker));
@@ -393,12 +393,12 @@ void QwtPlotPrintFilter::apply(QwtPlotItem *item) const
 
             break;
         }
-        default:    
+        default:
             break;
     }
 }
 
-/*! 
+/*!
    Reset color and fonts of a plot
    \sa apply()
 */
@@ -461,7 +461,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
             if ( w->inherits("QwtLegendItem") )
             {
                 QwtLegendItem *label = (QwtLegendItem *)w;
-                const QwtPlotItem *plotItem = 
+                const QwtPlotItem *plotItem =
                     (const QwtPlotItem*)plot->legend()->find(label);
 
                 QwtSymbol symbol = label->symbol();
@@ -495,7 +495,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
         if ( scaleWidget )
         {
             QPalette palette = scaleWidget->palette();
-            palette.setColor(QPalette::Active, Palette::Foreground,
+            palette.setColor(QPalette::Active, Palette::WindowText,
                              cache.scaleColor[axis]);
             scaleWidget->setPalette(palette);
 
@@ -511,7 +511,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
     if ( hasBackgroundColor(plot) )
     {
         QPalette p = plot->palette();
-        p.setColor(QPalette::Active, Palette::Background, cache.widgetBackground);
+        p.setColor(QPalette::Active, Palette::Window, cache.widgetBackground);
         plot->setPalette(p);
     }
 
@@ -519,7 +519,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
     {
         plot->setCanvasBackground(cache.canvasBackground);
     }
-   
+
     const QwtPlotItemList& itmList = plot->itemList();
     for ( QwtPlotItemIterator it = itmList.begin();
         it != itmList.end(); ++it )
@@ -608,7 +608,7 @@ void QwtPlotPrintFilter::reset(QwtPlotItem *item) const
                 pen.setColor(cache.markerLineColors[m]);
                 m->setLinePen(pen);
             }
-            
+
             QwtSymbol symbol = m->symbol();
 
             if ( cache.markerSymbolPenColors.contains(m) )

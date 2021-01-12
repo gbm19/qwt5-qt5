@@ -74,9 +74,9 @@ QwtPlot::QwtPlot(const QwtText &title, QWidget *parent):
  */
 QwtPlot::QwtPlot(QWidget *parent, const char *name):
     QFrame(parent, name)
-{   
+{
     initPlot(QwtText());
-}   
+}
 #endif
 
 
@@ -100,7 +100,7 @@ void QwtPlot::initPlot(const QwtText &title)
 
 #if QT_VERSION < 0x040000
     setWFlags(Qt::WNoAutoErase);
-#endif 
+#endif
 
     d_data->layout = new QwtPlotLayout;
 
@@ -130,7 +130,7 @@ void QwtPlot::initPlot(const QwtText &title)
 
     updateTabOrder();
 
-    setSizePolicy(QSizePolicy::MinimumExpanding, 
+    setSizePolicy(QSizePolicy::MinimumExpanding,
         QSizePolicy::MinimumExpanding);
 
     resize( 200, 200 );
@@ -191,7 +191,7 @@ void QwtPlot::setAutoReplot(bool tf)
 //! \return true if the autoReplot option is set.
 bool QwtPlot::autoReplot() const
 {
-    return d_data->autoReplot; 
+    return d_data->autoReplot;
 }
 
 /*!
@@ -257,33 +257,33 @@ const QwtTextLabel *QwtPlot::titleLabel() const
   \sa insertLegend()
 */
 QwtLegend *QwtPlot::legend()
-{ 
+{
     return d_data->legend;
-}   
+}
 
 /*!
   \return the plot's legend
   \sa insertLegend()
 */
 const QwtLegend *QwtPlot::legend() const
-{ 
+{
     return d_data->legend;
-}   
+}
 
 
 /*!
   \return the plot's canvas
 */
 QwtPlotCanvas *QwtPlot::canvas()
-{ 
+{
     return d_data->canvas;
-}   
+}
 
 /*!
   \return the plot's canvas
 */
 const QwtPlotCanvas *QwtPlot::canvas() const
-{ 
+{
     return d_data->canvas;
 }
 
@@ -297,7 +297,7 @@ void QwtPlot::polish()
 #endif
 }
 
-/*!  
+/*!
   Return sizeHint
   \sa minimumSizeHint()
 */
@@ -309,7 +309,7 @@ QSize QwtPlot::sizeHint() const
     for ( int axisId = 0; axisId < axisCnt; axisId++ )
     {
         if ( axisEnabled(axisId) )
-        {   
+        {
             const int niceDist = 40;
             const QwtScaleWidget *scaleWidget = axisWidget(axisId);
             const QwtScaleDiv &scaleDiv = scaleWidget->scaleDraw()->scaleDiv();
@@ -317,14 +317,14 @@ QSize QwtPlot::sizeHint() const
 
             if ( axisId == yLeft || axisId == yRight )
             {
-                int hDiff = (majCnt - 1) * niceDist 
+                int hDiff = (majCnt - 1) * niceDist
                     - scaleWidget->minimumSizeHint().height();
                 if ( hDiff > dh )
                     dh = hDiff;
             }
             else
             {
-                int wDiff = (majCnt - 1) * niceDist 
+                int wDiff = (majCnt - 1) * niceDist
                     - scaleWidget->minimumSizeHint().width();
                 if ( wDiff > dw )
                     dw = wDiff;
@@ -345,7 +345,7 @@ QSize QwtPlot::minimumSizeHint() const
     return hint;
 }
 
-/*! 
+/*!
   Resize and update internal layout
   \param e Resize event
 */
@@ -421,7 +421,7 @@ void QwtPlot::updateLayout()
                     r = r.subtracted(QRegion(d_data->layout->scaleRect(yLeft)));
                 if ( axisEnabled(yRight) )
                     r = r.subtracted(QRegion(d_data->layout->scaleRect(yRight)));
-                r.translate(-d_data->layout->scaleRect(axisId).x(), 
+                r.translate(-d_data->layout->scaleRect(axisId).x(),
                     -d_data->layout->scaleRect(axisId).y());
 
                 axisWidget(axisId)->setMask(r);
@@ -433,7 +433,7 @@ void QwtPlot::updateLayout()
             axisWidget(axisId)->hide();
     }
 
-    if ( d_data->legend && 
+    if ( d_data->legend &&
         d_data->layout->legendPosition() != ExternalLegend )
     {
         if (d_data->legend->itemCount() > 0)
@@ -448,7 +448,7 @@ void QwtPlot::updateLayout()
     d_data->canvas->setGeometry(d_data->layout->canvasRect());
 }
 
-/*! 
+/*!
    Update the focus tab order
 
    The order is changed so that the canvas will be in front of the
@@ -464,23 +464,23 @@ void QwtPlot::updateTabOrder()
     if ( d_data->canvas->focusPolicy() == NoFocus )
         return;
 #endif
-    if ( d_data->legend.isNull()  
+    if ( d_data->legend.isNull()
         || d_data->layout->legendPosition() == ExternalLegend
         || d_data->legend->legendItems().count() == 0 )
     {
         return;
     }
 
-    // Depending on the position of the legend the 
+    // Depending on the position of the legend the
     // tab order will be changed that the canvas is
     // next to the last legend item, or before
-    // the first one. 
+    // the first one.
 
-    const bool canvasFirst = 
+    const bool canvasFirst =
         d_data->layout->legendPosition() == QwtPlot::BottomLegend ||
         d_data->layout->legendPosition() == QwtPlot::RightLegend;
 
-    QWidget *previous = NULL; 
+    QWidget *previous = NULL;
 
     QWidget *w;
 #if QT_VERSION >= 0x040000
@@ -495,7 +495,7 @@ void QwtPlot::updateTabOrder()
 #endif
     {
         bool isLegendItem = false;
-        if ( w->focusPolicy() != NoFocus 
+        if ( w->focusPolicy() != NoFocus
             && w->parent() && w->parent() == d_data->legend->contentsWidget() )
         {
             isLegendItem = true;
@@ -524,7 +524,7 @@ void QwtPlot::updateTabOrder()
         setTabOrder(previous, d_data->canvas);
 }
 
-/*! 
+/*!
   Redraw the canvas.
   \param painter Painter used for drawing
 
@@ -539,11 +539,11 @@ void QwtPlot::drawCanvas(QPainter *painter)
     for ( int axisId = 0; axisId < axisCnt; axisId++ )
         maps[axisId] = canvasMap(axisId);
 
-    drawItems(painter, 
+    drawItems(painter,
         d_data->canvas->contentsRect(), maps, QwtPlotPrintFilter());
 }
 
-/*! 
+/*!
   Redraw the canvas items.
   \param painter Painter used for drawing
   \param rect Bounding rectangle where to paint
@@ -551,8 +551,8 @@ void QwtPlot::drawCanvas(QPainter *painter)
   \param pfilter Plot print filter
 */
 
-void QwtPlot::drawItems(QPainter *painter, const QRect &rect, 
-        const QwtScaleMap map[axisCnt], 
+void QwtPlot::drawItems(QPainter *painter, const QRect &rect,
+        const QwtScaleMap map[axisCnt],
         const QwtPlotPrintFilter &pfilter) const
 {
     const QwtPlotItemList& itmList = itemList();
@@ -575,7 +575,7 @@ void QwtPlot::drawItems(QPainter *painter, const QRect &rect,
                 item->testRenderHint(QwtPlotItem::RenderAntialiased) );
 #endif
 
-            item->draw(painter, 
+            item->draw(painter,
                 map[item->xAxis()], map[item->yAxis()],
                 rect);
 
@@ -589,7 +589,7 @@ void QwtPlot::drawItems(QPainter *painter, const QRect &rect,
   \return Map for the axis on the canvas. With this map pixel coordinates can
           translated to plot coordinates and vice versa.
   \sa QwtScaleMap, transform(), invTransform()
-  
+
 */
 QwtScaleMap QwtPlot::canvasMap(int axisId) const
 {
@@ -625,12 +625,12 @@ QwtScaleMap QwtPlot::canvasMap(int axisId) const
         const QRect &canvasRect = d_data->canvas->contentsRect();
         if ( axisId == yLeft || axisId == yRight )
         {
-            map.setPaintInterval(canvasRect.bottom() - margin, 
+            map.setPaintInterval(canvasRect.bottom() - margin,
                 canvasRect.top() + margin);
         }
         else
         {
-            map.setPaintInterval(canvasRect.left() + margin, 
+            map.setPaintInterval(canvasRect.left() + margin,
                 canvasRect.right() - margin);
         }
     }
@@ -667,8 +667,8 @@ int QwtPlot::margin() const
 
 /*!
   \brief Change the background of the plotting area
-  
-  Sets c to QColorGroup::Background of all colorgroups of 
+
+  Sets c to QColorGroup::Background of all colorgroups of
   the palette of the canvas. Using canvas()->setPalette()
   is a more powerful way to set these colors.
   \param c new background color
@@ -679,11 +679,7 @@ void QwtPlot::setCanvasBackground(const QColor &c)
 
     for ( int i = 0; i < QPalette::NColorGroups; i++ )
     {
-#if QT_VERSION < 0x040000
-        p.setColor((QPalette::ColorGroup)i, QColorGroup::Background, c);
-#else
-        p.setColor((QPalette::ColorGroup)i, QPalette::Background, c);
-#endif
+        p.setColor((QPalette::ColorGroup)i, QPalette::Window, c);
     }
 
     canvas()->setPalette(p);
@@ -692,23 +688,17 @@ void QwtPlot::setCanvasBackground(const QColor &c)
 /*!
   Nothing else than: canvas()->palette().color(
         QPalette::Normal, QColorGroup::Background);
-  
+
   \return the background color of the plotting area.
 */
 const QColor & QwtPlot::canvasBackground() const
 {
-#if QT_VERSION < 0x040000
-    return canvas()->palette().color(
-        QPalette::Normal, QColorGroup::Background);
-#else
-    return canvas()->palette().color(
-        QPalette::Normal, QPalette::Background);
-#endif
+    return canvas()->palette().color(QPalette::Normal, QPalette::Window);
 }
 
 /*!
   \brief Change the border width of the plotting area
-  Nothing else than canvas()->setLineWidth(w), 
+  Nothing else than canvas()->setLineWidth(w),
   left for compatibility only.
   \param w new border width
 */
@@ -717,14 +707,14 @@ void QwtPlot::setCanvasLineWidth(int w)
     canvas()->setLineWidth(w);
     updateLayout();
 }
- 
-/*! 
-  Nothing else than: canvas()->lineWidth(), 
+
+/*!
+  Nothing else than: canvas()->lineWidth(),
   left for compatibility only.
   \return the border width of the plotting area
 */
 int QwtPlot::canvasLineWidth() const
-{ 
+{
     return canvas()->lineWidth();
 }
 
@@ -745,7 +735,7 @@ void QwtPlot::legendItemClicked()
 {
     if ( d_data->legend && sender()->isWidgetType() )
     {
-        QwtPlotItem *plotItem = 
+        QwtPlotItem *plotItem =
             (QwtPlotItem*)d_data->legend->find((QWidget *)sender());
         if ( plotItem )
             emit legendClicked(plotItem);
@@ -760,14 +750,14 @@ void QwtPlot::legendItemChecked(bool on)
 {
     if ( d_data->legend && sender()->isWidgetType() )
     {
-        QwtPlotItem *plotItem = 
+        QwtPlotItem *plotItem =
             (QwtPlotItem*)d_data->legend->find((QWidget *)sender());
         if ( plotItem )
             emit legendChecked(plotItem, on);
     }
 }
 
-/*! 
+/*!
    Remove all curves and markers
    \deprecated Use QwtPlotDeict::detachItems instead
 */
@@ -781,18 +771,18 @@ void QwtPlot::clear()
   \brief Insert a legend
 
   If the position legend is \c QwtPlot::LeftLegend or \c QwtPlot::RightLegend
-  the legend will be organized in one column from top to down. 
-  Otherwise the legend items will be placed in a table 
+  the legend will be organized in one column from top to down.
+  Otherwise the legend items will be placed in a table
   with a best fit number of columns from left to right.
 
-  If pos != QwtPlot::ExternalLegend the plot widget will become 
-  parent of the legend. It will be deleted when the plot is deleted, 
+  If pos != QwtPlot::ExternalLegend the plot widget will become
+  parent of the legend. It will be deleted when the plot is deleted,
   or another legend is set with insertLegend().
-       
+
   \param legend Legend
   \param pos The legend's position. For top/left position the number
              of colums will be limited to 1, otherwise it will be set to
-             unlimited. 
+             unlimited.
 
   \param ratio Ratio between legend and the bounding rect
                of title, canvas and axes. The legend will be shrinked
@@ -801,10 +791,10 @@ void QwtPlot::clear()
                it will be reset to the default ratio.
                The default vertical/horizontal ratio is 0.33/0.5.
 
-  \sa legend(), QwtPlotLayout::legendPosition(), 
+  \sa legend(), QwtPlotLayout::legendPosition(),
       QwtPlotLayout::setLegendPosition()
 */
-void QwtPlot::insertLegend(QwtLegend *legend, 
+void QwtPlot::insertLegend(QwtLegend *legend,
     QwtPlot::LegendPosition pos, double ratio)
 {
     d_data->layout->setLegendPosition(pos, ratio);
