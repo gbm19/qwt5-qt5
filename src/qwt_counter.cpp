@@ -48,7 +48,7 @@ public:
   \param parent
  */
 QwtCounter::QwtCounter(QWidget *parent):
-    QWidget(parent) 
+    QWidget(parent)
 {
     initCounter();
 }
@@ -63,7 +63,7 @@ QwtCounter::QwtCounter(QWidget *parent):
   \param parent
  */
 QwtCounter::QwtCounter(QWidget *parent, const char *name):
-    QWidget(parent, name) 
+    QWidget(parent, name)
 {
     initCounter();
 }
@@ -102,7 +102,7 @@ void QwtCounter::initCounter()
     layout->addWidget(d_data->valueEdit);
 
 #if QT_VERSION >= 0x040000
-    connect( d_data->valueEdit, SIGNAL(editingFinished()), 
+    connect( d_data->valueEdit, SIGNAL(editingFinished()),
         SLOT(textChanged()) );
 #else
     connect( d_data->valueEdit, SIGNAL(returnPressed()), SLOT(textChanged()) );
@@ -124,7 +124,7 @@ void QwtCounter::initCounter()
 
         connect(btn, SIGNAL(released()), SLOT(btnReleased()));
         connect(btn, SIGNAL(clicked()), SLOT(btnClicked()));
-    
+
         d_data->buttonUp[i] = btn;
     }
 
@@ -164,15 +164,15 @@ void QwtCounter::polish()
 }
 
 //! Set from lineedit
-void QwtCounter::textChanged() 
+void QwtCounter::textChanged()
 {
-    if ( !d_data->editable ) 
+    if ( !d_data->editable )
         return;
 
     bool converted = false;
 
     const double value = d_data->valueEdit->text().toDouble(&converted);
-    if ( converted ) 
+    if ( converted )
        setValue( value );
 }
 
@@ -187,7 +187,7 @@ void QwtCounter::setEditable(bool editable)
 #if QT_VERSION >= 0x040000
     using namespace Qt;
 #endif
-    if ( editable == d_data->editable ) 
+    if ( editable == d_data->editable )
         return;
 
     d_data->editable = editable;
@@ -195,15 +195,15 @@ void QwtCounter::setEditable(bool editable)
 }
 
 //! returns whether the line edit is edatble. (default is yes)
-bool QwtCounter::editable() const 
-{   
+bool QwtCounter::editable() const
+{
     return d_data->editable;
 }
 
 /*!
-   Handle PolishRequest events 
+   Handle PolishRequest events
 */
-bool QwtCounter::event ( QEvent * e ) 
+bool QwtCounter::event ( QEvent * e )
 {
 #if QT_VERSION >= 0x040000
     if ( e->type() == QEvent::PolishRequest )
@@ -327,11 +327,12 @@ void QwtCounter::wheelEvent(QWheelEvent *e)
 #endif
             increment = d_data->increment[2];
     }
-        
+
     for ( int i = 0; i < d_data->nButtons; i++ )
     {
         if ( d_data->buttonDown[i]->geometry().contains(e->pos()) ||
             d_data->buttonUp[i]->geometry().contains(e->pos()) )
+
         {
             increment = d_data->increment[i];
         }
@@ -339,7 +340,7 @@ void QwtCounter::wheelEvent(QWheelEvent *e)
 
     const int wheel_delta = 120;
 
-    int delta = e->delta();
+    int delta = e->angleDelta().y();
     if ( delta >= 2 * wheel_delta )
         delta /= 2; // Never saw an abs(delta) < 240
 
@@ -466,12 +467,12 @@ void QwtCounter::setNumButtons(int n)
 /*!
     \return The number of buttons on each side of the widget.
 */
-int QwtCounter::numButtons() const 
-{ 
-    return d_data->nButtons; 
+int QwtCounter::numButtons() const
+{
+    return d_data->nButtons;
 }
 
-/*!  
+/*!
   Display number string
 
   \param number Number
@@ -540,7 +541,7 @@ QSize QwtCounter::sizeHint() const
     if ( d_data->valueEdit->hasFrame() )
         w += 2 * style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 #else
-    w += 2 * d_data->valueEdit->frameWidth(); 
+    w += 2 * d_data->valueEdit->frameWidth();
 #endif
 
     // Now we replace default sizeHint contribution of d_data->valueEdit by
@@ -548,7 +549,7 @@ QSize QwtCounter::sizeHint() const
 
     w += QWidget::sizeHint().width() - d_data->valueEdit->sizeHint().width();
 
-    const int h = qwtMin(QWidget::sizeHint().height(), 
+    const int h = qwtMin(QWidget::sizeHint().height(),
         d_data->valueEdit->minimumSizeHint().height());
     return QSize(w, h);
 }
@@ -558,8 +559,8 @@ double QwtCounter::step() const
 {
     return QwtDoubleRange::step();
 }
-    
-/*! 
+
+/*!
    Set the step size
    \param stepSize Step size
    \sa QwtDoubleRange::setStep()
@@ -575,7 +576,7 @@ double QwtCounter::minVal() const
     return minValue();
 }
 
-/*! 
+/*!
   Set the minimum value of the range
 
   \param value Minimum value
@@ -592,7 +593,7 @@ double QwtCounter::maxVal() const
     return QwtDoubleRange::maxValue();
 }
 
-/*! 
+/*!
   Set the maximum value of the range
 
   \param value Maximum value
@@ -603,7 +604,7 @@ void QwtCounter::setMaxValue(double value)
     setRange(minValue(), value, step());
 }
 
-/*! 
+/*!
   Set the number of increment steps for button 1
   \param nSteps Number of steps
 */
@@ -618,7 +619,7 @@ int QwtCounter::stepButton1() const
     return incSteps(Button1);
 }
 
-/*! 
+/*!
   Set the number of increment steps for button 2
   \param nSteps Number of steps
 */
@@ -633,7 +634,7 @@ int QwtCounter::stepButton2() const
     return incSteps(Button2);
 }
 
-/*! 
+/*!
   Set the number of increment steps for button 3
   \param nSteps Number of steps
 */
