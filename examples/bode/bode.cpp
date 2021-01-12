@@ -64,7 +64,7 @@ public:
 //
 //-----------------------------------------------------------------
 
-MainWin::MainWin(QWidget *parent): 
+MainWin::MainWin(QWidget *parent):
     QMainWindow(parent)
 {
     d_plot = new BodePlot(this);
@@ -74,7 +74,7 @@ MainWin::MainWin(QWidget *parent):
     setContextMenuPolicy(Qt::NoContextMenu);
 #endif
 
-    d_zoomer[0] = new Zoomer( QwtPlot::xBottom, QwtPlot::yLeft, 
+    d_zoomer[0] = new Zoomer( QwtPlot::xBottom, QwtPlot::yLeft,
         d_plot->canvas());
     d_zoomer[0]->setRubberBand(QwtPicker::RectRubberBand);
     d_zoomer[0]->setRubberBandPen(QColor(Qt::green));
@@ -83,13 +83,13 @@ MainWin::MainWin(QWidget *parent):
 
     d_zoomer[1] = new Zoomer(QwtPlot::xTop, QwtPlot::yRight,
          d_plot->canvas());
-    
+
     d_panner = new QwtPlotPanner(d_plot->canvas());
-    d_panner->setMouseButton(Qt::MidButton);
+    d_panner->setMouseButton(Qt::MiddleButton);
 
     d_picker = new QwtPlotPicker(QwtPlot::xBottom, QwtPlot::yLeft,
-        QwtPicker::PointSelection | QwtPicker::DragSelection, 
-        QwtPlotPicker::CrossRubberBand, QwtPicker::AlwaysOn, 
+        QwtPicker::PointSelection | QwtPicker::DragSelection,
+        QwtPlotPicker::CrossRubberBand, QwtPicker::AlwaysOn,
         d_plot->canvas());
     d_picker->setRubberBandPen(QColor(Qt::green));
     d_picker->setRubberBand(QwtPicker::CrossRubberBand);
@@ -123,7 +123,7 @@ MainWin::MainWin(QWidget *parent):
     btnPrint->setUsesTextLabel(true);
 #endif
 
-#if QT_VERSION < 0x040000 
+#if QT_VERSION < 0x040000
     QToolButton *btnSVG = new QToolButton(toolBar);
     btnSVG->setTextLabel("SVG");
     btnSVG->setPixmap(print_xpm);
@@ -159,7 +159,7 @@ MainWin::MainWin(QWidget *parent):
     QwtCounter *cntDamp = new QwtCounter(hBox);
     cntDamp->setRange(0.0, 5.0, 0.01);
     cntDamp->setValue(0.0);
-    
+
     layout->addWidget(cntDamp, 0);
 
 #if QT_VERSION >= 0x040000
@@ -176,11 +176,11 @@ MainWin::MainWin(QWidget *parent):
     enableZoomMode(false);
     showInfo();
 
-    connect(cntDamp, SIGNAL(valueChanged(double)), 
-        d_plot, SLOT(setDamp(double))); 
+    connect(cntDamp, SIGNAL(valueChanged(double)),
+        d_plot, SLOT(setDamp(double)));
 
     connect(btnPrint, SIGNAL(clicked()), SLOT(print()));
-#if QT_VERSION < 0x040000 
+#if QT_VERSION < 0x040000
     connect(btnSVG, SIGNAL(clicked()), SLOT(exportSVG()));
 #elif QT_VERSION >= 0x040300
 #ifdef QT_SVG_LIB
@@ -218,16 +218,11 @@ void MainWin::print()
     }
 
     printer.setCreator("Bode example");
-    printer.setOrientation(QPrinter::Landscape);
+    printer.setPageOrientation(QPageLayout::Landscape);
 
-#if QT_VERSION >= 0x040000
     QPrintDialog dialog(&printer);
     if ( dialog.exec() )
     {
-#else
-    if (printer.setup())
-    {
-#endif
         QwtPlotPrintFilter filter;
         if ( printer.colorMode() == QPrinter::GrayScale )
         {
@@ -253,7 +248,7 @@ void MainWin::exportSVG()
     if ( !fileName.isEmpty() )
     {
         // enable workaround for Qt3 misalignments
-        QwtPainter::setSVGMode(true); 
+        QwtPainter::setSVGMode(true);
 
         QPicture picture;
 

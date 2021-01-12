@@ -21,7 +21,7 @@ void CurveData::append(double *x, double *y, int count)
         d_y.resize(newSize);
     }
 
-    for ( register int i = 0; i < count; i++ )
+    for ( int i = 0; i < count; i++ )
     {
         d_x[d_count + i] = x[i];
         d_y[d_count + i] = y[i];
@@ -49,7 +49,7 @@ const double *CurveData::y() const
     return d_y.data();
 }
 
-IncrementalPlot::IncrementalPlot(QWidget *parent): 
+IncrementalPlot::IncrementalPlot(QWidget *parent):
     QwtPlot(parent),
     d_data(NULL),
     d_curve(NULL)
@@ -77,7 +77,7 @@ void IncrementalPlot::appendData(double *x, double *y, int size)
         d_curve = new QwtPlotCurve("Test Curve");
         d_curve->setStyle(QwtPlotCurve::NoCurve);
         d_curve->setPaintAttribute(QwtPlotCurve::PaintFiltered);
-    
+
         const QColor &c = Qt::white;
         d_curve->setSymbol(QwtSymbol(QwtSymbol::XCross,
             QBrush(c), QPen(c), QSize(5, 5)) );
@@ -88,11 +88,11 @@ void IncrementalPlot::appendData(double *x, double *y, int size)
     d_data->append(x, y, size);
     d_curve->setRawData(d_data->x(), d_data->y(), d_data->count());
 
-    const bool cacheMode = 
+    const bool cacheMode =
         canvas()->testPaintAttribute(QwtPlotCanvas::PaintCached);
 
 #if QT_VERSION >= 0x040000 && defined(Q_WS_X11)
-    // Even if not recommended by TrollTech, Qt::WA_PaintOutsidePaintEvent 
+    // Even if not recommended by TrollTech, Qt::WA_PaintOutsidePaintEvent
     // works on X11. This has an tremendous effect on the performance..
 
     canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, true);
