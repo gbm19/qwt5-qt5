@@ -142,8 +142,8 @@ void QwtPlotCanvas::setPaintAttribute(PaintAttribute attribute, bool on)
         {
             /*
               If not visible, changing of the background mode
-              is delayed until it becomes visible. This tries to avoid 
-              looking through the canvas when the canvas is shown the first 
+              is delayed until it becomes visible. This tries to avoid
+              looking through the canvas when the canvas is shown the first
               time.
              */
 
@@ -198,7 +198,7 @@ void QwtPlotCanvas::setFocusIndicator(FocusIndicator focusIndicator)
 
 /*!
   \return Focus indicator
-  
+
   \sa FocusIndicator, setFocusIndicator()
 */
 QwtPlotCanvas::FocusIndicator QwtPlotCanvas::focusIndicator() const
@@ -231,13 +231,13 @@ void QwtPlotCanvas::paintEvent(QPaintEvent *event)
 {
 #if QT_VERSION >= 0x040000
     QPainter painter(this);
-    
-    if ( !contentsRect().contains( event->rect() ) ) 
+
+    if ( !contentsRect().contains( event->rect() ) )
     {
         painter.save();
         painter.setClipRegion( event->region() & frameRect() );
         drawFrame( &painter );
-        painter.restore(); 
+        painter.restore();
     }
 
     painter.setClipRegion(event->region() & contentsRect());
@@ -251,13 +251,13 @@ void QwtPlotCanvas::paintEvent(QPaintEvent *event)
         setSystemBackground(false);
 }
 
-/*! 
+/*!
   Redraw the canvas, and focus rect
   \param painter Painter
 */
 void QwtPlotCanvas::drawContents(QPainter *painter)
 {
-    if ( d_data->paintAttributes & PaintCached && d_data->cache 
+    if ( d_data->paintAttributes & PaintCached && d_data->cache
         && d_data->cache->size() == contentsRect().size() )
     {
         painter->drawPixmap(contentsRect().topLeft(), *d_data->cache);
@@ -296,7 +296,7 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
 #if QT_VERSION >= 0x040000
         bgBrush = palette().brush(backgroundRole());
 #else
-    QColorGroup::ColorRole role = 
+    QColorGroup::ColorRole role =
         QPalette::backgroundRoleFromMode( backgroundMode() );
     bgBrush = colorGroup().brush( role );
 #endif
@@ -355,7 +355,7 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
     }
 }
 
-/*! 
+/*!
   Draw the focus indication
   \param painter Painter
 */
@@ -405,16 +405,12 @@ void QwtPlotCanvas::replot()
         !testPaintAttribute(QwtPlotCanvas::PaintPacked)
         && !testPaintAttribute(QwtPlotCanvas::PaintCached);
 
-#if QT_VERSION >= 0x040000
-    const bool noBackgroundMode = testAttribute(Qt::WA_NoBackground);
+    const bool noBackgroundMode = testAttribute(Qt::WA_OpaquePaintEvent);
     if ( !erase && !noBackgroundMode )
-        setAttribute(Qt::WA_NoBackground, true);
+        setAttribute(Qt::WA_OpaquePaintEvent, true);
 
     repaint(contentsRect());
 
     if ( !erase && !noBackgroundMode )
-        setAttribute(Qt::WA_NoBackground, false);
-#else
-    repaint(contentsRect(), erase);
-#endif
+        setAttribute(Qt::WA_OpaquePaintEvent, false);
 }

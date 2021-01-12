@@ -10,7 +10,7 @@
 #include <qevent.h>
 #include "qwt_event_pattern.h"
 
-/*! 
+/*!
   Constructor
 
   \sa MousePatternCode, KeyPatternCode
@@ -69,12 +69,12 @@ void QwtEventPattern::initMousePattern(int numButtons)
         {
             setMousePattern(MouseSelect1, Qt::LeftButton);
             setMousePattern(MouseSelect2, Qt::RightButton);
-            setMousePattern(MouseSelect3, Qt::MidButton);
+            setMousePattern(MouseSelect3, Qt::MiddleButton);
         }
     }
     for ( int i = 0; i < 3; i++ )
     {
-        setMousePattern(MouseSelect4 + i, 
+        setMousePattern(MouseSelect4 + i,
             d_mousePattern[MouseSelect1 + i].button,
             d_mousePattern[MouseSelect1 + i].state | shiftButton);
     }
@@ -166,24 +166,24 @@ QwtEventPattern::keyPattern() const
 }
 
 //! Return ,ouse patterns
-QwtArray<QwtEventPattern::MousePattern> &QwtEventPattern::mousePattern() 
+QwtArray<QwtEventPattern::MousePattern> &QwtEventPattern::mousePattern()
 {
     return d_mousePattern;
 }
 
 //! Return Key patterns
-QwtArray<QwtEventPattern::KeyPattern> &QwtEventPattern::keyPattern() 
+QwtArray<QwtEventPattern::KeyPattern> &QwtEventPattern::keyPattern()
 {
     return d_keyPattern;
 }
 
 /*!
-  \brief Compare a mouse event with an event pattern. 
+  \brief Compare a mouse event with an event pattern.
 
   A mouse event matches the pattern when both have the same button
   value and in the state value the same key flags(Qt::KeyButtonMask)
   are set.
-  
+
   \param pattern Index of the event pattern
   \param e Mouse event
   \return true if matches
@@ -201,12 +201,12 @@ bool QwtEventPattern::mouseMatch(uint pattern, const QMouseEvent *e) const
 }
 
 /*!
-  \brief Compare a mouse event with an event pattern. 
+  \brief Compare a mouse event with an event pattern.
 
   A mouse event matches the pattern when both have the same button
   value and in the state value the same key flags(Qt::KeyButtonMask)
   are set.
-  
+
   \param pattern Mouse event pattern
   \param e Mouse event
   \return true if matches
@@ -222,7 +222,7 @@ bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
 
     const bool matched =
 #if QT_VERSION < 0x040000
-        (e->state() & Qt::KeyButtonMask) == 
+        (e->state() & Qt::KeyButtonMask) ==
             (pattern.state & Qt::KeyButtonMask);
 #else
         (uint)(e->modifiers() & Qt::KeyboardModifierMask) ==
@@ -233,12 +233,12 @@ bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
 }
 
 /*!
-  \brief Compare a key event with an event pattern. 
+  \brief Compare a key event with an event pattern.
 
   A key event matches the pattern when both have the same key
   value and in the state value the same key flags (Qt::KeyButtonMask)
   are set.
-  
+
   \param pattern Index of the event pattern
   \param e Key event
   \return true if matches
@@ -256,12 +256,12 @@ bool QwtEventPattern::keyMatch(uint pattern, const QKeyEvent *e) const
 }
 
 /*!
-  \brief Compare a key event with an event pattern. 
+  \brief Compare a key event with an event pattern.
 
   A key event matches the pattern when both have the same key
   value and in the state value the same key flags (Qt::KeyButtonMask)
   are set.
-  
+
   \param pattern Key event pattern
   \param e Key event
   \return true if matches
@@ -277,7 +277,7 @@ bool QwtEventPattern::keyMatch(
 
     const bool matched =
 #if QT_VERSION < 0x040000
-        (e->state() & Qt::KeyButtonMask) == 
+        (e->state() & Qt::KeyButtonMask) ==
             (pattern.state & Qt::KeyButtonMask);
 #else
         (uint)(e->modifiers() & Qt::KeyboardModifierMask) ==

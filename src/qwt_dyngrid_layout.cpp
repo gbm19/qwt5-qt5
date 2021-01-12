@@ -21,65 +21,13 @@ class QwtDynGridLayout::PrivateData
 {
 public:
 
-#if QT_VERSION < 0x040000
-    class LayoutIterator: public QGLayoutIterator
-    {
-    public:
-        LayoutIterator(PrivateData *data):
-            d_data(data)  
-        {
-            d_iterator = d_data->itemList.begin();
-        }
-
-        virtual QLayoutItem *current()
-        { 
-            if (d_iterator == d_data->itemList.end())
-               return NULL;
-
-            return *d_iterator;
-        }
-
-        virtual QLayoutItem *next()
-        { 
-            if (d_iterator == d_data->itemList.end())
-               return NULL;
-
-            d_iterator++;
-            if (d_iterator == d_data->itemList.end())
-               return NULL;
-
-            return *d_iterator;
-        }
-
-        virtual QLayoutItem *takeCurrent()
-        { 
-            if ( d_iterator == d_data->itemList.end() )
-                return NULL;
-
-            QLayoutItem *item = *d_iterator;
-
-            d_data->isDirty = true;
-            d_iterator = d_data->itemList.remove(d_iterator);
-            return item;
-        }
-
-    private:
-        
-        QValueListIterator<QLayoutItem*> d_iterator;
-        QwtDynGridLayout::PrivateData *d_data;
-    };
-#endif
 
     PrivateData():
         isDirty(true)
     {
     }
 
-#if QT_VERSION < 0x040000
-    typedef QValueList<QLayoutItem*> LayoutItemList;
-#else
     typedef QList<QLayoutItem*> LayoutItemList;
-#endif
 
     mutable LayoutItemList itemList;
 
@@ -87,11 +35,7 @@ public:
     uint numRows;
     uint numCols;
 
-#if QT_VERSION < 0x040000
-    QSizePolicy::ExpandData expanding;
-#else
     Qt::Orientations expanding;
-#endif
 
     bool isDirty;
     QwtArray<QSize> itemSizeHints;
@@ -104,7 +48,7 @@ public:
   \param spacing Spacing
 */
 
-QwtDynGridLayout::QwtDynGridLayout(QWidget *parent, 
+QwtDynGridLayout::QwtDynGridLayout(QWidget *parent,
         int margin, int spacing):
     QLayout(parent)
 {
@@ -113,18 +57,6 @@ QwtDynGridLayout::QwtDynGridLayout(QWidget *parent,
     setSpacing(spacing);
     setMargin(margin);
 }
-
-#if QT_VERSION < 0x040000
-/*!
-  \param parent Parent widget
-  \param spacing Spacing
-*/
-QwtDynGridLayout::QwtDynGridLayout(QLayout *parent, int spacing):
-    QLayout(parent, spacing)
-{
-    init();
-}
-#endif
 
 /*!
   \param spacing Spacing
@@ -142,25 +74,16 @@ QwtDynGridLayout::QwtDynGridLayout(int spacing)
 void QwtDynGridLayout::init()
 {
     d_data = new QwtDynGridLayout::PrivateData;
-    d_data->maxCols = d_data->numRows 
+    d_data->maxCols = d_data->numRows
         = d_data->numCols = 0;
 
-#if QT_VERSION < 0x040000
-    d_data->expanding = QSizePolicy::NoDirection;
-    setSupportsMargin(true);
-#else
-    d_data->expanding = 0;
-#endif
+    d_data->expanding = Qt::Horizontal;
 }
 
 //! Destructor
 
 QwtDynGridLayout::~QwtDynGridLayout()
 {
-#if QT_VERSION < 0x040000
-    deleteAllItems(); 
-#endif
-
     delete d_data;
 }
 
@@ -191,7 +114,7 @@ void QwtDynGridLayout::updateLayoutCache()
   \param maxCols upper limit, 0 means unlimited
   \sa maxCols()
 */
-  
+
 void QwtDynGridLayout::setMaxCols(uint maxCols)
 {
     d_data->maxCols = maxCols;
@@ -203,9 +126,9 @@ void QwtDynGridLayout::setMaxCols(uint maxCols)
   \sa setMaxCols()
 */
 
-uint QwtDynGridLayout::maxCols() const 
-{ 
-    return d_data->maxCols; 
+uint QwtDynGridLayout::maxCols() const
+{
+    return d_data->maxCols;
 }
 
 //! Adds item to the next free position.
@@ -216,8 +139,8 @@ void QwtDynGridLayout::addItem(QLayoutItem *item)
     invalidate();
 }
 
-/*! 
-  \return true if this layout is empty. 
+/*!
+  \return true if this layout is empty.
 */
 
 bool QwtDynGridLayout::isEmpty() const
@@ -225,7 +148,7 @@ bool QwtDynGridLayout::isEmpty() const
     return d_data->itemList.isEmpty();
 }
 
-/*! 
+/*!
   \return number of layout items
 */
 
@@ -235,13 +158,13 @@ uint QwtDynGridLayout::itemCount() const
 }
 
 #if  QT_VERSION < 0x040000
-/*! 
+/*!
   \return An iterator over the children of this layout.
 */
 
 QLayoutIterator QwtDynGridLayout::iterator()
-{       
-    return QLayoutIterator( 
+{
+    return QLayoutIterator(
         new QwtDynGridLayout::PrivateData::LayoutIterator(d_data) );
 }
 
@@ -270,7 +193,7 @@ QLayoutItem *QwtDynGridLayout::itemAt( int index ) const
 
     return d_data->itemList.at(index);
 }
-    
+
 /*!
   Find the item at a spcific index and remove it from the layout
 
@@ -281,7 +204,7 @@ QLayoutItem *QwtDynGridLayout::takeAt( int index )
 {
     if ( index < 0 || index >= d_data->itemList.count() )
         return NULL;
-  
+
     d_data->isDirty = true;
     return d_data->itemList.takeAt(index);
 }
@@ -295,7 +218,7 @@ int QwtDynGridLayout::count() const
 /*!
   Set whether this layout can make use of more space than sizeHint().
   A value of Qt::Vertical or Qt::Horizontal means that it wants to grow in only
-  one dimension, while Qt::Vertical | Qt::Horizontal means that it wants 
+  one dimension, while Qt::Vertical | Qt::Horizontal means that it wants
   to grow in both dimensions. The default value is 0.
 
   \param expanding Or'd orientations
@@ -309,7 +232,7 @@ void QwtDynGridLayout::setExpandingDirections(Qt::Orientations expanding)
 /*!
   Returns whether this layout can make use of more space than sizeHint().
   A value of Qt::Vertical or Qt::Horizontal means that it wants to grow in only
-  one dimension, while Qt::Vertical | Qt::Horizontal means that it wants 
+  one dimension, while Qt::Vertical | Qt::Horizontal means that it wants
   to grow in both dimensions.
   \sa setExpandingDirections()
 */
@@ -321,8 +244,8 @@ Qt::Orientations QwtDynGridLayout::expandingDirections() const
 #endif
 
 /*!
-  Reorganizes columns and rows and resizes managed widgets within 
-  the rectangle rect. 
+  Reorganizes columns and rows and resizes managed widgets within
+  the rectangle rect.
 
   \param rect Layout geometry
 */
@@ -357,7 +280,7 @@ void QwtDynGridLayout::setGeometry(const QRect &rect)
     }
 }
 
-/*! 
+/*!
   Calculate the number of columns for a given width. It tries to
   use as many columns as possible (limited by maxCols())
 
@@ -371,7 +294,7 @@ uint QwtDynGridLayout::columnsForWidth(int width) const
         return 0;
 
     uint maxCols = itemCount();
-    if ( d_data->maxCols > 0 ) 
+    if ( d_data->maxCols > 0 )
         maxCols = qwtMin( d_data->maxCols, maxCols );
 
     if ( maxRowWidth( maxCols ) <= width )
@@ -387,7 +310,7 @@ uint QwtDynGridLayout::columnsForWidth(int width) const
     return 1; // At least 1 column
 }
 
-/*! 
+/*!
   Calculate the width of a layout for a given number of
   columns.
 
@@ -405,11 +328,11 @@ int QwtDynGridLayout::maxRowWidth(int numCols) const
     if ( d_data->isDirty )
         ((QwtDynGridLayout*)this)->updateLayoutCache();
 
-    for ( uint index = 0; 
+    for ( uint index = 0;
         index < (uint)d_data->itemSizeHints.count(); index++ )
     {
         col = index % numCols;
-        colWidth[col] = qwtMax(colWidth[col], 
+        colWidth[col] = qwtMax(colWidth[col],
             d_data->itemSizeHints[int(index)].width());
     }
 
@@ -512,14 +435,14 @@ QList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
     colX[0] = xOffset + margin();
     for ( int c = 1; c < (int)numCols; c++ )
         colX[c] = colX[c-1] + colWidth[c-1] + xySpace;
-    
+
     const int itemCount = d_data->itemList.size();
     for ( int i = 0; i < itemCount; i++ )
     {
         const int row = i / numCols;
         const int col = i % numCols;
 
-        QRect itemGeometry(colX[col], rowY[row], 
+        QRect itemGeometry(colX[col], rowY[row],
             colWidth[col], rowHeight[row]);
         itemGeometries.append(itemGeometry);
     }
@@ -537,7 +460,7 @@ QList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
   \param colWidth Array where to fill in the calculated column widths.
 */
 
-void QwtDynGridLayout::layoutGrid(uint numCols, 
+void QwtDynGridLayout::layoutGrid(uint numCols,
     QwtArray<int>& rowHeight, QwtArray<int>& colWidth) const
 {
     if ( numCols <= 0 )
@@ -546,7 +469,7 @@ void QwtDynGridLayout::layoutGrid(uint numCols,
     if ( d_data->isDirty )
         ((QwtDynGridLayout*)this)->updateLayoutCache();
 
-    for ( uint index = 0; 
+    for ( uint index = 0;
         index < (uint)d_data->itemSizeHints.count(); index++ )
     {
         const int row = index / numCols;
@@ -554,9 +477,9 @@ void QwtDynGridLayout::layoutGrid(uint numCols,
 
         const QSize &size = d_data->itemSizeHints[int(index)];
 
-        rowHeight[row] = (col == 0) 
+        rowHeight[row] = (col == 0)
             ? size.height() : qwtMax(rowHeight[row], size.height());
-        colWidth[col] = (row == 0) 
+        colWidth[col] = (row == 0)
             ? size.width() : qwtMax(colWidth[col], size.width());
     }
 }
@@ -571,7 +494,7 @@ bool QwtDynGridLayout::hasHeightForWidth() const
 }
 
 /*!
-  \return The preferred height for this layout, given the width w. 
+  \return The preferred height for this layout, given the width w.
   \sa hasHeightForWidth()
 */
 int QwtDynGridLayout::heightForWidth(int width) const
@@ -603,7 +526,7 @@ int QwtDynGridLayout::heightForWidth(int width) const
 
   \sa setExpanding(), expanding()
 */
-void QwtDynGridLayout::stretchGrid(const QRect &rect, 
+void QwtDynGridLayout::stretchGrid(const QRect &rect,
     uint numCols, QwtArray<int>& rowHeight, QwtArray<int>& colWidth) const
 {
     if ( numCols == 0 || isEmpty() )
@@ -683,7 +606,7 @@ QSize QwtDynGridLayout::sizeHint() const
     for ( int row = 0; row < (int)numRows; row++ )
         h += rowHeight[row];
 
-    int w = 2 * margin() + (numCols - 1) * spacing(); 
+    int w = 2 * margin() + (numCols - 1) * spacing();
     for ( int col = 0; col < (int)numCols; col++ )
         w += colWidth[col];
 
@@ -695,9 +618,9 @@ QSize QwtDynGridLayout::sizeHint() const
   \sa numCols()
   \warning The number of rows might change whenever the geometry changes
 */
-uint QwtDynGridLayout::numRows() const 
-{ 
-    return d_data->numRows; 
+uint QwtDynGridLayout::numRows() const
+{
+    return d_data->numRows;
 }
 
 /*!
@@ -705,7 +628,7 @@ uint QwtDynGridLayout::numRows() const
   \sa numRows()
   \warning The number of columns might change whenever the geometry changes
 */
-uint QwtDynGridLayout::numCols() const 
-{ 
-    return d_data->numCols; 
+uint QwtDynGridLayout::numCols() const
+{
+    return d_data->numCols;
 }
