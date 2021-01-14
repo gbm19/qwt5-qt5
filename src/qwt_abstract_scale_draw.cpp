@@ -197,7 +197,7 @@ void QwtAbstractScaleDraw::draw(QPainter *painter,
 #if QT_VERSION < 0x040000
         pen.setColor(colorGroup.foreground());
 #else
-        pen.setColor(palette.color(QPalette::Foreground));
+        pen.setColor(palette.color(QPalette::WindowText));
 #endif
         painter->setPen(pen);
 
@@ -224,7 +224,7 @@ void QwtAbstractScaleDraw::draw(QPainter *painter,
 #if QT_VERSION < 0x040000
         pen.setColor(colorGroup.foreground());
 #else
-        pen.setColor(palette.color(QPalette::Foreground));
+        pen.setColor(palette.color(QPalette::WindowText));
 #endif
         painter->setPen(pen);
 

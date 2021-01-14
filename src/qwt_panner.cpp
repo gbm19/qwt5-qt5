@@ -312,7 +312,7 @@ void QwtPanner::paintEvent(QPaintEvent *pe)
             QPalette::Normal, QColorGroup::Background);
 #else
         parentWidget()->palette().color(
-            QPalette::Normal, QPalette::Background);
+            QPalette::Normal, QPalette::Window);
 #endif
 
     painter.setPen(Qt::NoPen);

@@ -640,7 +640,7 @@ void QwtThermo::drawThermo(QPainter *painter)
 #if QT_VERSION < 0x040000
         colorGroup().color(QColorGroup::Background);
 #else
-        palette().color(QPalette::Background);
+        palette().color(QPalette::Window);
 #endif
     painter->fillRect(bRect, bgColor);
 

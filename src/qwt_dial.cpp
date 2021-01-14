@@ -178,7 +178,7 @@ void QwtDial::initDial()
         p.setColor(cg, QColorGroup::Foreground, 
             p.color(cg, QColorGroup::Base));
 #else
-        p.setColor(cg, QPalette::Foreground, 
+        p.setColor(cg, QPalette::WindowText,
             p.color(cg, QPalette::Base));
 #endif
     }
@@ -590,7 +590,7 @@ void QwtDial::drawContents(QPainter *painter) const
 #else
     if ( testAttribute(Qt::WA_NoSystemBackground) ||
         palette().brush(QPalette::Base) != 
-            palette().brush(QPalette::Background) )
+            palette().brush(QPalette::Window) )
 #endif
     {
 
@@ -615,7 +615,7 @@ void QwtDial::drawContents(QPainter *painter) const
     if ( colorGroup().brush(QColorGroup::Foreground) !=
         colorGroup().brush(QColorGroup::Base) )
 #else
-    if ( palette().brush(QPalette::Foreground) !=
+    if ( palette().brush(QPalette::WindowText) !=
         palette().brush(QPalette::Base) )
 #endif
     {
@@ -625,7 +625,7 @@ void QwtDial::drawContents(QPainter *painter) const
 #if QT_VERSION < 0x040000
         painter->setBrush(colorGroup().brush(QColorGroup::Foreground));
 #else
-        painter->setBrush(palette().brush(QPalette::Foreground));
+        painter->setBrush(palette().brush(QPalette::WindowText));
 #endif
 
         painter->drawEllipse(insideScaleRect.x() - 1, insideScaleRect.y() - 1,
@@ -766,7 +766,7 @@ void QwtDial::drawScale(QPainter *painter, const QPoint &center,
     QPalette pal = palette();
 
     const QColor textColor = pal.color(QPalette::Text);
-    pal.setColor(QPalette::Foreground, textColor); //ticks, backbone
+    pal.setColor(QPalette::WindowText, textColor); //ticks, backbone
     
     painter->setPen(QPen(textColor, d_data->scaleDraw->penWidth()));
 

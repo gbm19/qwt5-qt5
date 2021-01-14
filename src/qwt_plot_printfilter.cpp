@@ -254,9 +254,9 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
         if ( scaleWidget )
         {
             cache.scaleColor[axis] = scaleWidget->palette().color(
-                QPalette::Active, Palette::Foreground);
+                QPalette::Active, Palette::WindowText);
             QPalette palette = scaleWidget->palette();
-            palette.setColor(QPalette::Active, Palette::Foreground,
+            palette.setColor(QPalette::Active, Palette::WindowText,
                              color(cache.scaleColor[axis], AxisScale));
             scaleWidget->setPalette(palette);
 
@@ -292,8 +292,8 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
     {
         QPalette p = plot->palette();
         cache.widgetBackground = plot->palette().color(
-            QPalette::Active, Palette::Background);
-        p.setColor(QPalette::Active, Palette::Background, 
+            QPalette::Active, Palette::Window);
+        p.setColor(QPalette::Active, Palette::Window,
             color(cache.widgetBackground, WidgetBackground));
         plot->setPalette(p);
     }
@@ -495,7 +495,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
         if ( scaleWidget )
         {
             QPalette palette = scaleWidget->palette();
-            palette.setColor(QPalette::Active, Palette::Foreground,
+            palette.setColor(QPalette::Active, Palette::WindowText,
                              cache.scaleColor[axis]);
             scaleWidget->setPalette(palette);
 
@@ -511,7 +511,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
     if ( hasBackgroundColor(plot) )
     {
         QPalette p = plot->palette();
-        p.setColor(QPalette::Active, Palette::Background, cache.widgetBackground);
+        p.setColor(QPalette::Active, Palette::Window, cache.widgetBackground);
         plot->setPalette(p);
     }
 

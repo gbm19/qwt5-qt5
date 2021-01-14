@@ -682,7 +682,7 @@ void QwtPlot::setCanvasBackground(const QColor &c)
 #if QT_VERSION < 0x040000
         p.setColor((QPalette::ColorGroup)i, QColorGroup::Background, c);
 #else
-        p.setColor((QPalette::ColorGroup)i, QPalette::Background, c);
+        p.setColor((QPalette::ColorGroup)i, QPalette::Window, c);
 #endif
     }
 
@@ -702,7 +702,7 @@ const QColor & QwtPlot::canvasBackground() const
         QPalette::Normal, QColorGroup::Background);
 #else
     return canvas()->palette().color(
-        QPalette::Normal, QPalette::Background);
+        QPalette::Normal, QPalette::Window);
 #endif
 }
 
