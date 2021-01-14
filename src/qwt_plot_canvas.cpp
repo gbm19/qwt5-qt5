@@ -406,14 +406,14 @@ void QwtPlotCanvas::replot()
         && !testPaintAttribute(QwtPlotCanvas::PaintCached);
 
 #if QT_VERSION >= 0x040000
-    const bool noBackgroundMode = testAttribute(Qt::WA_NoBackground);
+    const bool noBackgroundMode = testAttribute(Qt::WA_OpaquePaintEvent);
     if ( !erase && !noBackgroundMode )
-        setAttribute(Qt::WA_NoBackground, true);
+        setAttribute(Qt::WA_OpaquePaintEvent, true);
 
     repaint(contentsRect());
 
     if ( !erase && !noBackgroundMode )
-        setAttribute(Qt::WA_NoBackground, false);
+        setAttribute(Qt::WA_OpaquePaintEvent, false);
 #else
     repaint(contentsRect(), erase);
 #endif
