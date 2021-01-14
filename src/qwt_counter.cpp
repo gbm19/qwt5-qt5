@@ -339,7 +339,7 @@ void QwtCounter::wheelEvent(QWheelEvent *e)
 
     const int wheel_delta = 120;
 
-    int delta = e->delta();
+    int delta = e->angleDelta().y();
     if ( delta >= 2 * wheel_delta )
         delta /= 2; // Never saw an abs(delta) < 240
 

@@ -356,7 +356,7 @@ void QwtAbstractSlider::wheelEvent(QWheelEvent *e)
     getScrollMode(e->pos(), mode, direction);
     if ( mode != ScrNone )
     {
-        const int inc = e->delta() / WHEEL_DELTA;
+        const int inc = e->angleDelta().y() / WHEEL_DELTA;
         QwtDoubleRange::incPages(inc);
         if (value() != prevValue())
             emit sliderMoved(value());
