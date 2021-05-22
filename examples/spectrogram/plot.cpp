@@ -115,7 +115,7 @@ Plot::Plot(QWidget *parent):
 
     QwtPlotPanner *panner = new QwtPlotPanner(canvas());
     panner->setAxisEnabled(QwtPlot::yRight, false);
-    panner->setMouseButton(Qt::MidButton);
+    panner->setMouseButton(Qt::MiddleButton);
 
     // Avoid jumping when labels with more/less digits
     // appear/disappear when scrolling vertically
