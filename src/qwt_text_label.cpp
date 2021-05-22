@@ -324,6 +324,10 @@ int QwtTextLabel::defaultIndent() const
     else
         fnt = font();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
     return QFontMetrics(fnt).horizontalAdvance('x') / 2;
+#else
+    return QFontMetrics(fnt).width('x') / 2;
+#endif
 }
 

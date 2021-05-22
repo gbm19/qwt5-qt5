@@ -59,7 +59,11 @@ Slider::Slider(QWidget *parent, int sliderType):
 
     d_label = new QLabel("0", this);
     d_label->setAlignment(alignment);
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
     d_label->setFixedWidth(d_label->fontMetrics().horizontalAdvance("10000.9"));
+#else
+    d_label->setFixedWidth(d_label->fontMetrics().width("10000.9"));
+#endif
 
     connect(d_slider, SIGNAL(valueChanged(double)), SLOT(setNum(double)));
 

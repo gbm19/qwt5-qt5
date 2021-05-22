@@ -150,7 +150,11 @@ QwtCounter::~QwtCounter()
 */
 void QwtCounter::polish()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
     const int w = d_data->valueEdit->fontMetrics().horizontalAdvance("W") + 8;
+#else
+    const int w = d_data->valueEdit->fontMetrics().width("W") + 8;
+#endif
 
     for ( int i = 0; i < ButtonCnt; i++ )
     {
@@ -535,7 +539,11 @@ QSize QwtCounter::sizeHint() const
     tmp.fill('9', w);
 
     QFontMetrics fm(d_data->valueEdit->font());
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
     w = fm.horizontalAdvance(tmp) + 2;
+#else
+    w = fm.width(tmp) + 2;
+#endif
 #if QT_VERSION >= 0x040000
     if ( d_data->valueEdit->hasFrame() )
         w += 2 * style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
