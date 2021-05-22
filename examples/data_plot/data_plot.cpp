@@ -25,7 +25,7 @@ DataPlot::DataPlot(QWidget *parent):
     canvas()->setPaintAttribute(QwtPlotCanvas::PaintPacked, false);
 
 #if QT_VERSION >= 0x040000
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11) || defined(QT_X11EXTRAS_LIB)
     /*
        Qt::WA_PaintOnScreen is only supported for X11, but leads
        to substantial bugs with Qt 4.2.x/Windows

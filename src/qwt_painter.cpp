@@ -34,7 +34,7 @@
 
 QwtMetricsMap QwtPainter::d_metricsMap;
 
-#if defined(Q_WS_X11)
+#if defined(Q_WS_X11) || defined(QT_X11EXTRAS_LIB)
 bool QwtPainter::d_deviceClipping = true;
 #else
 bool QwtPainter::d_deviceClipping = false;

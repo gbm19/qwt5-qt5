@@ -91,7 +91,7 @@ void IncrementalPlot::appendData(double *x, double *y, int size)
     const bool cacheMode = 
         canvas()->testPaintAttribute(QwtPlotCanvas::PaintCached);
 
-#if QT_VERSION >= 0x040000 && defined(Q_WS_X11)
+#if QT_VERSION >= 0x040000 && QT_VERSION < 0x050000 && ( defined(Q_WS_X11) || defined(QT_X11EXTRAS_LIB) )
     // Even if not recommended by TrollTech, Qt::WA_PaintOutsidePaintEvent 
     // works on X11. This has an tremendous effect on the performance..
 
@@ -102,7 +102,7 @@ void IncrementalPlot::appendData(double *x, double *y, int size)
     d_curve->draw(d_curve->dataSize() - size, d_curve->dataSize() - 1);
     canvas()->setPaintAttribute(QwtPlotCanvas::PaintCached, cacheMode);
 
-#if QT_VERSION >= 0x040000 && defined(Q_WS_X11)
+#if QT_VERSION >= 0x040000 && QT_VERSION < 0x050000 && ( defined(Q_WS_X11) || defined(QT_X11EXTRAS_LIB) )
     canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, false);
 #endif
 }

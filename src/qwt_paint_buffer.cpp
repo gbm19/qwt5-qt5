@@ -112,7 +112,7 @@ void QwtPaintBuffer::open(QPaintDevice *device,
 
     if ( isEnabled() )
     {
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11) || defined(QT_X11EXTRAS_LIB)
         if ( d_pixBuffer.x11Screen() != d_device->x11Screen() )
             d_pixBuffer.x11SetScreen(d_device->x11Screen());
 #endif
