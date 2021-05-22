@@ -149,7 +149,7 @@ void QwtDynGridLayout::init()
     d_data->expanding = QSizePolicy::NoDirection;
     setSupportsMargin(true);
 #else
-    d_data->expanding = 0;
+    d_data->expanding = Qt::Horizontal;
 #endif
 }
 

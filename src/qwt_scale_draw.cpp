@@ -32,7 +32,7 @@ public:
     PrivateData():
         len(0),
         alignment(QwtScaleDraw::BottomScale),
-        labelAlignment(0),
+        labelAlignment(Qt::AlignLeft),
         labelRotation(0.0)
     {
     }
