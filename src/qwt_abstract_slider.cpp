@@ -353,10 +353,18 @@ void QwtAbstractSlider::wheelEvent(QWheelEvent *e)
     int mode = ScrNone, direction = 0;
 
     // Give derived classes a chance to say ScrNone
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    getScrollMode(e->position().toPoint(), mode, direction);
+#else
     getScrollMode(e->pos(), mode, direction);
+#endif
     if ( mode != ScrNone )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         const int inc = e->angleDelta().y() / WHEEL_DELTA;
+#else
+        const int inc = e->delta() / WHEEL_DELTA;
+#endif
         QwtDoubleRange::incPages(inc);
         if (value() != prevValue())
             emit sliderMoved(value());

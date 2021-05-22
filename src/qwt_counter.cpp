@@ -334,8 +334,13 @@ void QwtCounter::wheelEvent(QWheelEvent *e)
         
     for ( int i = 0; i < d_data->nButtons; i++ )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        if ( d_data->buttonDown[i]->geometry().contains(e->position().toPoint()) ||
+            d_data->buttonUp[i]->geometry().contains(e->position().toPoint()) )
+#else
         if ( d_data->buttonDown[i]->geometry().contains(e->pos()) ||
             d_data->buttonUp[i]->geometry().contains(e->pos()) )
+#endif
         {
             increment = d_data->increment[i];
         }
@@ -343,7 +348,11 @@ void QwtCounter::wheelEvent(QWheelEvent *e)
 
     const int wheel_delta = 120;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     int delta = e->angleDelta().y();
+#else
+    int delta = e->delta();
+#endif
     if ( delta >= 2 * wheel_delta )
         delta /= 2; // Never saw an abs(delta) < 240
 

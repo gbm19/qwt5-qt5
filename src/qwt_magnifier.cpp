@@ -417,8 +417,13 @@ void QwtMagnifier::widgetWheelEvent(QWheelEvent *we)
            of 120 (== 15 * 8).
         */
         double f = ::pow(d_data->wheelFactor, 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
             qwtAbs(we->angleDelta().y() / 120.0));
         if ( we->angleDelta().y() > 0 )
+#else
+            qwtAbs(we->delta() / 120.0));
+        if ( we->delta() > 0 )
+#endif
             f = 1 / f;
 
         rescale(f);
