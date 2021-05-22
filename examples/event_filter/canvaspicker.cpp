@@ -40,8 +40,8 @@ CanvasPicker::CanvasPicker(QwtPlot *plot):
         "or with these keys:\n\n"
         "- Up:\t\tSelect next curve\n"
         "- Down:\t\tSelect previous curve\n"
-        "- Left, ´-´:\tSelect next point\n"
-        "- Right, ´+´:\tSelect previous point\n"
+        "- Left, `-`:\tSelect next point\n"
+        "- Right, `+`:\tSelect previous point\n"
         "- 7, 8, 9, 4, 6, 1, 2, 3:\tMove selected point";
 #if QT_VERSION >= 0x040000
     canvas->setWhatsThis(text);
