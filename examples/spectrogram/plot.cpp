@@ -145,7 +145,12 @@ void Plot::showSpectrogram(bool on)
 void Plot::printPlot()
 {
     QPrinter printer;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    printer.setPageOrientation(QPageLayout::Landscape);
+#else
     printer.setOrientation(QPrinter::Landscape);
+#endif
+
 #if QT_VERSION < 0x040000
     printer.setColorMode(QPrinter::Color);
 #if 0

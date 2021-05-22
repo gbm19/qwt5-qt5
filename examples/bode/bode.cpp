@@ -218,7 +218,11 @@ void MainWin::print()
     }
 
     printer.setCreator("Bode example");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    printer.setPageOrientation(QPageLayout::Landscape);
+#else
     printer.setOrientation(QPrinter::Landscape);
+#endif
 
 #if QT_VERSION >= 0x040000
     QPrintDialog dialog(&printer);
