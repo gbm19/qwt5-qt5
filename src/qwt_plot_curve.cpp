@@ -630,7 +630,7 @@ void QwtPlotCurve::draw(QPainter *painter,
     const QwtScaleMap &xMap, const QwtScaleMap &yMap, 
     int from, int to) const
 {
-    const size_t numPoints = dataSize();
+    const int numPoints = dataSize();
 
     if ( !painter || numPoints <= 0 )
         return;
@@ -1237,7 +1237,7 @@ double QwtPlotCurve::baseline() const
 */
 int QwtPlotCurve::dataSize() const
 {
-    return d_xy->size();
+    return static_cast<int>(d_xy->size());
 }
 
 /*!
@@ -1253,7 +1253,7 @@ int QwtPlotCurve::dataSize() const
 */
 int QwtPlotCurve::closestPoint(const QPoint &pos, double *dist) const
 {
-    const size_t numPoints = dataSize();
+    const int numPoints = dataSize();
 
     if ( plot() == NULL || numPoints <= 0 )
         return -1;
@@ -1264,7 +1264,7 @@ int QwtPlotCurve::closestPoint(const QPoint &pos, double *dist) const
     int index = -1;
     double dmin = 1.0e10;
 
-    for (int i=0; i < (int)numPoints; i++)
+    for (int i=0; i < numPoints; i++)
     {
         const double cx = xMap.xTransform(x(i)) - pos.x();
         const double cy = yMap.xTransform(y(i)) - pos.y();
