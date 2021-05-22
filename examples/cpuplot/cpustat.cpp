@@ -215,8 +215,10 @@ void CpuStat::lookUp(double values[NValues]) const
                 const QStringList valueList =
 #if QT_VERSION < 0x040000
                     QStringList::split(" ", line);
-#else
+#elif QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
                     line.split(" ",  QString::SkipEmptyParts);
+#else
+                    line.split(" ",  Qt::SkipEmptyParts);
 #endif
                 if ( valueList.count() >= 5 )
                 {
